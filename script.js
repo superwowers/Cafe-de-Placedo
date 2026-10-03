@@ -1,88 +1,285 @@
 /**
- * Café de Place-do - Modular Vanilla JavaScript (ES6+)
+ * Café de Place-do - Artisanal Minimalist JavaScript
+ * Betis, Sta. Monica, Rizal, Nueva Ecija
  * 
  * Modules:
- * 1. NavigationModule: Mobile hamburger menu toggle & accessible drawer
- * 2. ThemeModule: Dark/Light mode toggle with persistence & a11y states
- * 3. CustomizerModule: Interactive drink customizer, tab switcher & price calculator
- * 4. ContactFormModule: Accessible client-side static form validation & feedback
+ * 1. NavigationModule: Mobile menu toggle
+ * 2. MenuSheetsModule: Interactive menu board viewer & full-screen lightbox
+ * 3. QuickFinderModule: Instant search & price check
+ * 4. CommunityWishlistModule: Drink requests, community upvoting, & reviews
  */
 
 (() => {
   'use strict';
 
   /* ==========================================================================
-     1. NAVIGATION MODULE (Hamburger & Responsive Menu)
+     COMPLETE MENU REFERENCE (For Quick Price Finder)
      ========================================================================== */
-  const NavigationModule = (() => {
-    const menuToggle = document.getElementById('menu-toggle');
-    const primaryNav = document.getElementById('primary-navigation');
-    const navLinks = document.querySelectorAll('.nav-link');
+  const MENU_LOOKUP = [
+    // Coffee
+    { name: 'Americano', cat: 'Coffee', price: 'Iced ₱59 / Hot ₱69' },
+    { name: 'Latte', cat: 'Coffee', price: 'Iced ₱75 / Hot ₱89' },
+    { name: 'Iced Dark Mocha', cat: 'Coffee', price: '₱85.00' },
+    { name: 'Iced White Mocha', cat: 'Coffee', price: '₱85.00' },
+    { name: 'Vanilla Latte', cat: 'Coffee', price: 'Iced ₱75 / Hot ₱89' },
+    { name: 'Caramel Macchiato', cat: 'Coffee (Best Seller)', price: 'Iced ₱79 / Hot ₱99' },
+    { name: 'Salted Caramel Macchiato', cat: 'Coffee', price: 'Iced ₱79 / Hot ₱99' },
+    { name: 'Spanish Latte', cat: 'Coffee (Best Seller)', price: 'Iced ₱75 / Hot ₱89' },
+    { name: 'Butterscotch Latte', cat: 'Coffee', price: 'Iced ₱75 / Hot ₱89' },
+    { name: 'Hazelnut Macchiato', cat: 'Coffee', price: 'Iced ₱75 / Hot ₱89' },
+    { name: 'Hazelnut Caramel Macchiato', cat: 'Coffee (Best Seller)', price: 'Iced ₱79 / Hot ₱99' },
 
-    if (!menuToggle || !primaryNav) return;
+    // Seasalt Series
+    { name: 'Seasalt Americano', cat: 'Seasalt Series (New)', price: '₱85.00' },
+    { name: 'Seasalt Spanish Latte', cat: 'Seasalt Series (#1 Best Seller)', price: '₱95.00' },
+    { name: 'Seasalt Matcha Latte', cat: 'Seasalt Series', price: '₱105.00' },
 
-    /**
-     * Toggles the mobile navigation state
-     * @param {boolean} [forceState] - Optional explicit boolean to set open/close
-     */
-    const toggleMenu = (forceState) => {
-      const isCurrentlyExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-      const shouldOpen = typeof forceState === 'boolean' ? forceState : !isCurrentlyExpanded;
+    // Non-Coffee
+    { name: 'Strawberry Milk', cat: 'Non-Coffee', price: '₱85.00' },
+    { name: 'Blueberry Milk', cat: 'Non-Coffee', price: '₱85.00' },
+    { name: 'Choco Latte', cat: 'Non-Coffee (Best Seller)', price: '₱85.00' },
+    { name: 'Oreo Latte', cat: 'Non-Coffee (Best Seller)', price: '₱85.00' },
 
-      menuToggle.setAttribute('aria-expanded', String(shouldOpen));
-      menuToggle.setAttribute('aria-label', shouldOpen ? 'Close navigation menu' : 'Open navigation menu');
-      menuToggle.classList.toggle('is-active', shouldOpen);
-      primaryNav.classList.toggle('is-open', shouldOpen);
+    // Signature Drinks
+    { name: 'Snow Dream Choco', cat: 'Signature (Best Seller)', price: '₱95.00' },
+    { name: 'Oreo Coffee Latte', cat: 'Signature (Best Seller)', price: '₱95.00' },
+    { name: 'Strawberry Oreo', cat: 'Signature', price: '₱95.00' },
+    { name: 'Tres Leches Caramel', cat: 'Signature (New Biscoff)', price: '₱125.00' },
 
-      if (shouldOpen) {
-        // Focus the first navigation link for keyboard users
-        const firstLink = primaryNav.querySelector('a');
-        if (firstLink) firstLink.focus();
+    // Matcha Series
+    { name: 'Matcha Latte', cat: 'Matcha Series (Best Seller)', price: '₱85.00' },
+    { name: 'Matcha Coffee Latte', cat: 'Matcha Series', price: '₱95.00' },
+    { name: 'Strawberry Matcha', cat: 'Matcha Series', price: '₱95.00' },
+    { name: 'Matcha Oreo Cream', cat: 'Matcha Series (Best Seller)', price: '₱95.00' },
+
+    // Biscoff Series
+    { name: 'Biscoff Milk', cat: 'Biscoff Series', price: '₱115.00' },
+    { name: 'Biscoffee', cat: 'Biscoff Series (Best Seller)', price: '₱125.00' },
+    { name: 'Biscoff Matcha', cat: 'Biscoff Series (New)', price: '₱115.00' },
+
+    // Fruity Juices & Sodas
+    { name: 'Blueberry Juice', cat: 'Fruity Juice', price: '16oz ₱39 / 22oz ₱49' },
+    { name: 'Grapes Juice', cat: 'Fruity Juice', price: '16oz ₱39 / 22oz ₱49' },
+    { name: 'Lemon Juice', cat: 'Fruity Juice', price: '16oz ₱39 / 22oz ₱49' },
+    { name: 'Lychee Juice', cat: 'Fruity Juice', price: '16oz ₱39 / 22oz ₱49' },
+    { name: 'Green Apple Juice', cat: 'Fruity Juice', price: '16oz ₱39 / 22oz ₱49' },
+    { name: 'Blueberry Fizz', cat: 'Fruity Soda', price: '16oz ₱49 / 22oz ₱59' },
+    { name: 'Grapes Fizz', cat: 'Fruity Soda', price: '16oz ₱49 / 22oz ₱59' },
+    { name: 'Lemon Fizz', cat: 'Fruity Soda', price: '16oz ₱49 / 22oz ₱59' },
+    { name: 'Lychee Fizz', cat: 'Fruity Soda', price: '16oz ₱49 / 22oz ₱59' },
+    { name: 'Green Apple Fizz', cat: 'Fruity Soda', price: '16oz ₱49 / 22oz ₱59' },
+
+    // Comfort Plates
+    { name: 'Crispy Chicken Poppers & Rice', cat: 'Comfort Plate', price: '₱109.00' },
+    { name: 'Beef Tapa & Rice', cat: 'Comfort Plate', price: '₱109.00' },
+    { name: 'Hungarian Sausage & Rice', cat: 'Comfort Plate', price: '₱109.00' },
+    { name: 'Garlic Pork Longganisa & Rice', cat: 'Comfort Plate', price: '₱109.00' },
+
+    // Snacks
+    { name: 'Snacks Platter', cat: 'Snacks (Hotdog, Fries, Cheese Sticks)', price: '₱70.00' },
+    { name: 'Chicks n’ Fries', cat: 'Snacks', price: '₱95.00' },
+    { name: 'Duo Chicks n’ Fries', cat: 'Snacks (Sharing)', price: '₱145.00' },
+    { name: 'Cheesy Chicken Onion Rings', cat: 'Snacks', price: '₱65.00' },
+
+    // Pancit Canton in a Bowl
+    { name: 'Canton Overload', cat: 'Pancit Canton (Egg+Spam+Siomai+Hotdog)', price: '₱95.00' },
+    { name: 'Spammy Canton', cat: 'Pancit Canton (Spam+Egg)', price: '₱75.00' },
+    { name: 'Siomai Canton', cat: 'Pancit Canton (Siomai+Egg)', price: '₱75.00' },
+    { name: 'Hotdog Canton', cat: 'Pancit Canton (Hotdog+Egg)', price: '₱75.00' }
+  ];
+
+  /* ==========================================================================
+     0. THEME MODULE (DARK / LIGHT MODE)
+     ========================================================================== */
+  const ThemeModule = (() => {
+    const toggleBtn = document.getElementById('theme-toggle');
+    const storageKey = 'cafe-placedo-theme';
+
+    const getStoredTheme = () => {
+      try {
+        return localStorage.getItem(storageKey);
+      } catch (e) {
+        return null;
       }
     };
 
-    /**
-     * Initializes all event listeners for navigation
-     */
+    const setStoredTheme = (theme) => {
+      try {
+        localStorage.setItem(storageKey, theme);
+      } catch (e) {
+        // Local storage unavailable
+      }
+    };
+
+    const applyTheme = (theme) => {
+      if (theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        if (toggleBtn) {
+          toggleBtn.setAttribute('aria-label', 'Switch to light mode');
+          toggleBtn.setAttribute('title', 'Switch to light mode');
+        }
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        if (toggleBtn) {
+          toggleBtn.setAttribute('aria-label', 'Switch to dark mode');
+          toggleBtn.setAttribute('title', 'Switch to dark mode');
+        }
+      }
+    };
+
     const init = () => {
-      // Toggle button click
-      menuToggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleMenu();
+      const stored = getStoredTheme();
+      // Default to light mode unless previously set to dark
+      const currentTheme = stored === 'dark' ? 'dark' : 'light';
+      applyTheme(currentTheme);
+
+      if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+          const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+          const nextTheme = isDark ? 'light' : 'dark';
+          applyTheme(nextTheme);
+          setStoredTheme(nextTheme);
+        });
+      }
+    };
+
+    return { init };
+  })();
+
+  /* ==========================================================================
+     1. NAVIGATION MODULE
+     ========================================================================== */
+  const NavigationModule = (() => {
+    const nav = document.getElementById('primary-navigation');
+    const toggleBtn = document.getElementById('menu-toggle');
+
+    const init = () => {
+      if (!nav || !toggleBtn) return;
+
+      toggleBtn.addEventListener('click', () => {
+        const isOpen = nav.classList.toggle('open');
+        toggleBtn.setAttribute('aria-expanded', String(isOpen));
       });
 
-      // Close menu when clicking any nav link
-      navLinks.forEach((link) => {
+      // Close on link click
+      nav.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', () => {
-          if (window.innerWidth < 1024) {
-            toggleMenu(false);
+          nav.classList.remove('open');
+          toggleBtn.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      // Close on outside click
+      document.addEventListener('click', (e) => {
+        if (!nav.contains(e.target) && !toggleBtn.contains(e.target)) {
+          nav.classList.remove('open');
+          toggleBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    };
+
+    return { init };
+  })();
+
+  /* ==========================================================================
+     2. MENU SHEETS & LIGHTBOX MODULE
+     ========================================================================== */
+  const MenuSheetsModule = (() => {
+    const tabP1 = document.getElementById('tab-page1-btn');
+    const tabP2 = document.getElementById('tab-page2-btn');
+    const sheetP1 = document.getElementById('menu-sheet-page1');
+    const sheetP2 = document.getElementById('menu-sheet-page2');
+
+    const modal = document.getElementById('lightbox-modal');
+    const modalImg = document.getElementById('lightbox-img');
+    const modalClose = document.getElementById('lightbox-close');
+    const backdrop = document.getElementById('lightbox-backdrop');
+
+    const openLightbox = (src) => {
+      if (!modal || !modalImg) return;
+      modalImg.src = src;
+      modal.removeAttribute('hidden');
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeLightbox = () => {
+      if (!modal) return;
+      modal.setAttribute('hidden', '');
+      document.body.style.overflow = '';
+      if (modalImg) modalImg.src = '';
+    };
+
+    const init = () => {
+      // Tab switcher
+      if (tabP1 && tabP2 && sheetP1 && sheetP2) {
+        tabP1.addEventListener('click', () => {
+          tabP1.classList.add('active');
+          tabP1.setAttribute('aria-selected', 'true');
+          tabP2.classList.remove('active');
+          tabP2.setAttribute('aria-selected', 'false');
+
+          sheetP1.classList.add('active');
+          sheetP1.removeAttribute('hidden');
+          sheetP2.classList.remove('active');
+          sheetP2.setAttribute('hidden', '');
+        });
+
+        tabP2.addEventListener('click', () => {
+          tabP2.classList.add('active');
+          tabP2.setAttribute('aria-selected', 'true');
+          tabP1.classList.remove('active');
+          tabP1.setAttribute('aria-selected', 'false');
+
+          sheetP2.classList.add('active');
+          sheetP2.removeAttribute('hidden');
+          sheetP1.classList.remove('active');
+          sheetP1.setAttribute('hidden', '');
+        });
+      }
+
+      // Zoom triggers
+      document.querySelectorAll('[data-zoom-target]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const target = btn.dataset.zoomTarget;
+          if (target) openLightbox(target);
+        });
+      });
+
+      // Click on frame to open
+      document.querySelectorAll('.sheet-image-frame').forEach(frame => {
+        frame.addEventListener('click', () => {
+          const img = frame.querySelector('.menu-sheet-img');
+          if (img && img.src) openLightbox(img.src);
+        });
+      });
+
+      // Click on drink card media to open
+      document.querySelectorAll('.drink-media').forEach(media => {
+        media.addEventListener('click', () => {
+          const img = media.querySelector('.drink-img');
+          if (img && img.src) openLightbox(img.src);
+        });
+      });
+
+      // Keyboard accessibility for menu board cards
+      document.querySelectorAll('.menu-board-card').forEach(card => {
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            const target = card.dataset.zoomTarget;
+            if (target) openLightbox(target);
           }
         });
       });
 
-      // Close menu when clicking outside of the header
-      document.addEventListener('click', (e) => {
-        if (
-          primaryNav.classList.contains('is-open') &&
-          !primaryNav.contains(e.target) &&
-          !menuToggle.contains(e.target)
-        ) {
-          toggleMenu(false);
-        }
-      });
+      // Modal close handlers
+      if (modalClose) modalClose.addEventListener('click', closeLightbox);
+      if (backdrop) backdrop.addEventListener('click', closeLightbox);
 
-      // Close menu on Escape key press
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && primaryNav.classList.contains('is-open')) {
-          toggleMenu(false);
-          menuToggle.focus();
-        }
-      });
-
-      // Reset menu state on viewport resize crossing desktop breakpoint
-      window.addEventListener('resize', () => {
-        if (window.innerWidth >= 1024 && primaryNav.classList.contains('is-open')) {
-          toggleMenu(false);
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal && !modal.hasAttribute('hidden')) {
+          closeLightbox();
         }
       });
     };
@@ -91,398 +288,609 @@
   })();
 
   /* ==========================================================================
-     2. THEME MODULE (Light / Dark Mode Toggle)
+     ITEMS FILTER & PAGINATION MODULE (AVAILABLE DRINKS & COMFORT FOOD)
      ========================================================================== */
-  const ThemeModule = (() => {
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const STORAGE_KEY = 'cafe-de-place-do-theme';
+  const DrinksFilterModule = (() => {
+    const filterBtns = document.querySelectorAll('.item-filter-btn, .drink-filter-btn');
+    const cards = Array.from(document.querySelectorAll('.drink-card'));
+    const paginationContainer = document.getElementById('showcase-pagination');
+    const prevBtn = document.getElementById('page-prev-btn');
+    const nextBtn = document.getElementById('page-next-btn');
+    const indicatorsBox = document.getElementById('page-indicators');
 
-    if (!themeToggleBtn) return;
+    const PAGE_SIZE = 8;
+    let currentCategory = 'all';
+    let currentPage = 1;
 
-    /**
-     * Retrieves the preferred theme from storage or system preference
-     * @returns {'light'|'dark'}
-     */
-    const getPreferredTheme = () => {
-      const storedTheme = localStorage.getItem(STORAGE_KEY);
-      if (storedTheme === 'light' || storedTheme === 'dark') {
-        return storedTheme;
+    const getMatchingCards = () => {
+      if (currentCategory === 'all') return cards;
+      return cards.filter(card => card.dataset.category === currentCategory);
+    };
+
+    const updateView = (scrollOnPageChange = false) => {
+      const matchingCards = getMatchingCards();
+      const totalPages = Math.ceil(matchingCards.length / PAGE_SIZE) || 1;
+
+      if (currentPage > totalPages) currentPage = totalPages;
+      if (currentPage < 1) currentPage = 1;
+
+      const startIndex = (currentPage - 1) * PAGE_SIZE;
+      const endIndex = startIndex + PAGE_SIZE;
+      const visibleSubset = new Set(matchingCards.slice(startIndex, endIndex));
+
+      cards.forEach(card => {
+        if (visibleSubset.has(card)) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      if (paginationContainer) {
+        if (matchingCards.length <= PAGE_SIZE) {
+          paginationContainer.classList.add('hidden');
+        } else {
+          paginationContainer.classList.remove('hidden');
+
+          if (prevBtn) {
+            prevBtn.disabled = currentPage <= 1;
+            prevBtn.setAttribute('aria-disabled', currentPage <= 1 ? 'true' : 'false');
+          }
+          if (nextBtn) {
+            nextBtn.disabled = currentPage >= totalPages;
+            nextBtn.setAttribute('aria-disabled', currentPage >= totalPages ? 'true' : 'false');
+          }
+
+          if (indicatorsBox) {
+            indicatorsBox.innerHTML = '';
+            for (let i = 1; i <= totalPages; i++) {
+              const pill = document.createElement('button');
+              pill.type = 'button';
+              pill.className = `page-pill ${i === currentPage ? 'active' : ''}`;
+              pill.textContent = i;
+              pill.setAttribute('aria-label', `Go to page ${i}`);
+              if (i === currentPage) {
+                pill.setAttribute('aria-current', 'page');
+              }
+              pill.addEventListener('click', () => {
+                if (currentPage !== i) {
+                  currentPage = i;
+                  updateView(true);
+                }
+              });
+              indicatorsBox.appendChild(pill);
+            }
+          }
+        }
       }
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+      if (scrollOnPageChange) {
+        const showcaseSection = document.getElementById('showcase');
+        if (showcaseSection) {
+          const rect = showcaseSection.getBoundingClientRect();
+          if (rect.top < 0) {
+            showcaseSection.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      }
     };
 
-    /**
-     * Applies theme to DOM and updates accessibility attributes
-     * @param {'light'|'dark'} theme
-     */
-    const applyTheme = (theme) => {
-      document.documentElement.setAttribute('data-theme', theme);
-      const isDark = theme === 'dark';
-      themeToggleBtn.setAttribute('aria-pressed', String(isDark));
-      themeToggleBtn.setAttribute(
-        'aria-label',
-        isDark ? 'Switch to light mode' : 'Switch to dark mode'
-      );
-    };
-
-    /**
-     * Initializes theme toggle and listeners
-     */
     const init = () => {
-      // Set initial theme
-      const initialTheme = getPreferredTheme();
-      applyTheme(initialTheme);
+      if (!cards.length) return;
 
-      // Listen for toggle click
-      themeToggleBtn.addEventListener('click', () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-        applyTheme(newTheme);
-        try {
-          localStorage.setItem(STORAGE_KEY, newTheme);
-        } catch (e) {
-          // Gracefully handle private browsing storage quotas
-        }
-      });
-
-      // Listen for system theme changes if user hasn't overridden
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        if (!localStorage.getItem(STORAGE_KEY)) {
-          applyTheme(e.matches ? 'dark' : 'light');
-        }
-      });
-    };
-
-    return { init };
-  })();
-
-  /* ==========================================================================
-     3. CUSTOMIZER MODULE (Interactive Drink Barista & Live Calculator)
-     ========================================================================== */
-  const CustomizerModule = (() => {
-    const tabButtons = document.querySelectorAll('.tab-btn');
-    const drinkSelect = document.getElementById('custom-drink-select');
-    const sizeRadios = document.querySelectorAll('input[name="cup-size"]');
-    const sweetnessSlider = document.getElementById('sweetness-slider');
-    const sweetnessValue = document.getElementById('sweetness-value');
-    const addonCheckboxes = document.querySelectorAll('input[name="addons"]');
-    const summaryName = document.getElementById('summary-name');
-    const summaryBreakdown = document.getElementById('summary-breakdown');
-    const totalPriceDisplay = document.getElementById('total-price-display');
-    const addToOrderBtn = document.getElementById('add-to-order-btn');
-    const orderFeedback = document.getElementById('order-feedback');
-
-    // Category options mapping
-    const DRINK_DATA = {
-      matcha: [
-        { id: 'matcha-oreo', name: 'Matcha Oreo Cream', basePrice: 130 },
-        { id: 'matcha-latte', name: 'Matcha Coffee Latte', basePrice: 135 },
-        { id: 'seasalt-matcha', name: 'Seasalt Matcha Latte', basePrice: 125 },
-        { id: 'classic-matcha', name: 'Classic Pure Matcha', basePrice: 115 }
-      ],
-      choco: [
-        { id: 'snow-dream', name: 'Snow Dream Choco', basePrice: 120 },
-        { id: 'choco-latte', name: 'Choco Latte', basePrice: 110 },
-        { id: 'mocha-blast', name: 'Mocha Choco Blast', basePrice: 125 },
-        { id: 'dark-cocoa', name: 'Dark Cocoa Seasalt', basePrice: 120 }
-      ],
-      coffee: [
-        { id: 'spanish-latte', name: 'Café Spanish Latte', basePrice: 115 },
-        { id: 'caramel-macchiato', name: 'Caramel Macchiato', basePrice: 120 },
-        { id: 'iced-americano', name: 'Iced Americano', basePrice: 90 },
-        { id: 'vanilla-latte', name: 'Vanilla Café Latte', basePrice: 110 }
-      ]
-    };
-
-    const SWEETNESS_LABELS = {
-      '0': '0% (Unsweetened)',
-      '25': '25% (Subtle Sweet)',
-      '50': '50% (Half Sweet)',
-      '75': '75% (Standard)',
-      '100': '100% (Extra Sweet)'
-    };
-
-    if (!drinkSelect || !totalPriceDisplay) return;
-
-    /**
-     * Populates the drink select dropdown based on selected category
-     * @param {'matcha'|'choco'|'coffee'} category
-     */
-    const populateDrinkOptions = (category) => {
-      const items = DRINK_DATA[category] || DRINK_DATA.matcha;
-      drinkSelect.innerHTML = '';
-
-      items.forEach((item, index) => {
-        const option = document.createElement('option');
-        option.value = item.id;
-        option.textContent = `${item.name} (₱${item.basePrice})`;
-        option.dataset.basePrice = String(item.basePrice);
-        option.dataset.drinkName = item.name;
-        if (index === 0) option.selected = true;
-        drinkSelect.appendChild(option);
-      });
-    };
-
-    /**
-     * Calculates the total drink price and updates summary display
-     */
-    const updateCalculation = () => {
-      // 1. Base Price
-      const selectedOption = drinkSelect.options[drinkSelect.selectedIndex];
-      const basePrice = selectedOption ? parseFloat(selectedOption.dataset.basePrice || 0) : 130;
-      const drinkName = selectedOption ? (selectedOption.dataset.drinkName || selectedOption.text) : 'Custom Drink';
-
-      // 2. Size Upcharge
-      let sizePrice = 0;
-      let sizeLabel = 'Regular (16 oz)';
-      sizeRadios.forEach((radio) => {
-        if (radio.checked) {
-          sizePrice = parseFloat(radio.dataset.sizeAdd || 0);
-          sizeLabel = radio.value === 'large' ? 'Large (22 oz)' : 'Regular (16 oz)';
-        }
-      });
-
-      // 3. Sweetness
-      const sweetnessPercent = sweetnessSlider ? sweetnessSlider.value : '75';
-      const sweetnessText = SWEETNESS_LABELS[sweetnessPercent] || `${sweetnessPercent}%`;
-      if (sweetnessValue) {
-        sweetnessValue.textContent = sweetnessText;
-      }
-
-      // 4. Add-ons
-      let addonsPrice = 0;
-      const selectedAddonNames = [];
-      addonCheckboxes.forEach((checkbox) => {
-        if (checkbox.checked) {
-          addonsPrice += parseFloat(checkbox.dataset.addonPrice || 0);
-          const title = checkbox.closest('.checkbox-pill')?.querySelector('.pill-title')?.textContent;
-          if (title) selectedAddonNames.push(title);
-        }
-      });
-
-      // Calculate Total
-      const grandTotal = basePrice + sizePrice + addonsPrice;
-
-      // Update UI Elements
-      if (summaryName) {
-        summaryName.textContent = drinkName;
-      }
-
-      if (summaryBreakdown) {
-        const addonsSummary = selectedAddonNames.length > 0 
-          ? `Add-ons: ${selectedAddonNames.join(', ')}` 
-          : 'No Extra Add-ons';
-        summaryBreakdown.textContent = `${sizeLabel} • Sweetness: ${sweetnessText} • ${addonsSummary}`;
-      }
-
-      if (totalPriceDisplay) {
-        totalPriceDisplay.textContent = `₱${grandTotal}`;
-      }
-    };
-
-    /**
-     * Initializes Customizer events
-     */
-    const init = () => {
-      // Category Tab Buttons
-      tabButtons.forEach((btn) => {
+      filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-          tabButtons.forEach((b) => {
+          filterBtns.forEach(b => {
             b.classList.remove('active');
             b.setAttribute('aria-selected', 'false');
           });
-
           btn.classList.add('active');
           btn.setAttribute('aria-selected', 'true');
 
-          const category = btn.dataset.drinkBase || 'matcha';
-          populateDrinkOptions(category);
-          updateCalculation();
+          currentCategory = btn.dataset.category || 'all';
+          currentPage = 1;
+          updateView(false);
         });
       });
 
-      // Drink Dropdown Change
-      drinkSelect.addEventListener('change', updateCalculation);
-
-      // Size Radios Change
-      sizeRadios.forEach((radio) => {
-        radio.addEventListener('change', updateCalculation);
-      });
-
-      // Sweetness Range Input
-      if (sweetnessSlider) {
-        sweetnessSlider.addEventListener('input', updateCalculation);
-      }
-
-      // Add-on Checkbox Changes
-      addonCheckboxes.forEach((checkbox) => {
-        checkbox.addEventListener('change', updateCalculation);
-      });
-
-      // Note My Order Button
-      if (addToOrderBtn && orderFeedback) {
-        addToOrderBtn.addEventListener('click', () => {
-          const drink = summaryName ? summaryName.textContent : 'Your drink';
-          const price = totalPriceDisplay ? totalPriceDisplay.textContent : '';
-
-          orderFeedback.textContent = `Saved! Mention "${drink}" (${price}) to our barista at the counter.`;
-          orderFeedback.classList.add('highlighted');
-
-          // Reset feedback highlight after 4 seconds
-          setTimeout(() => {
-            orderFeedback.classList.remove('highlighted');
-          }, 4000);
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+          if (currentPage > 1) {
+            currentPage--;
+            updateView(true);
+          }
         });
       }
 
-      // Initial run
-      updateCalculation();
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+          const matchingCards = getMatchingCards();
+          const totalPages = Math.ceil(matchingCards.length / PAGE_SIZE) || 1;
+          if (currentPage < totalPages) {
+            currentPage++;
+            updateView(true);
+          }
+        });
+      }
+
+      updateView(false);
     };
 
     return { init };
   })();
 
   /* ==========================================================================
-     4. CONTACT FORM MODULE (Accessible Validation & Feedback)
+     3. QUICK PRICE FINDER MODULE
      ========================================================================== */
-  const ContactFormModule = (() => {
-    const form = document.getElementById('contact-form');
-    const nameInput = document.getElementById('contact-name');
-    const emailInput = document.getElementById('contact-email');
-    const messageInput = document.getElementById('contact-message');
-    const nameError = document.getElementById('name-error');
-    const emailError = document.getElementById('email-error');
-    const messageError = document.getElementById('message-error');
-    const formStatus = document.getElementById('form-status');
-    const submitBtn = document.getElementById('submit-btn');
+  const QuickFinderModule = (() => {
+    const input = document.getElementById('quick-item-search');
+    const clearBtn = document.getElementById('clear-quick-search');
+    const resultsBox = document.getElementById('finder-results-box');
 
-    if (!form) return;
-
-    /**
-     * Validates email format using regex
-     * @param {string} email
-     * @returns {boolean}
-     */
-    const isValidEmail = (email) => {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return emailRegex.test(email);
-    };
-
-    /**
-     * Clears error messages for a field
-     * @param {HTMLElement} errorElement
-     * @param {HTMLElement} inputElement
-     */
-    const clearError = (errorElement, inputElement) => {
-      if (errorElement) errorElement.textContent = '';
-      if (inputElement) inputElement.removeAttribute('aria-invalid');
-    };
-
-    /**
-     * Sets error message and accessible state for a field
-     * @param {HTMLElement} errorElement
-     * @param {HTMLElement} inputElement
-     * @param {string} message
-     */
-    const setError = (errorElement, inputElement, message) => {
-      if (errorElement) errorElement.textContent = message;
-      if (inputElement) {
-        inputElement.setAttribute('aria-invalid', 'true');
-        inputElement.focus();
-      }
-    };
-
-    /**
-     * Initializes form events and client validation
-     */
     const init = () => {
-      // Realtime error clearing
-      if (nameInput) {
-        nameInput.addEventListener('input', () => clearError(nameError, nameInput));
-      }
-      if (emailInput) {
-        emailInput.addEventListener('input', () => clearError(emailError, emailInput));
-      }
-      if (messageInput) {
-        messageInput.addEventListener('input', () => clearError(messageError, messageInput));
-      }
+      if (!input || !resultsBox) return;
 
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
+      input.addEventListener('input', () => {
+        const query = input.value.trim().toLowerCase();
 
-        let hasError = false;
-
-        // Reset previous status
-        if (formStatus) {
-          formStatus.className = 'form-status';
-          formStatus.textContent = '';
+        if (clearBtn) {
+          clearBtn.hidden = query.length === 0;
         }
 
-        // Validate Name
-        if (!nameInput.value.trim()) {
-          setError(nameError, nameInput, 'Please enter your full name.');
-          hasError = true;
-        } else {
-          clearError(nameError, nameInput);
+        if (query.length === 0) {
+          resultsBox.hidden = true;
+          resultsBox.innerHTML = '';
+          return;
         }
 
-        // Validate Email
-        if (!emailInput.value.trim()) {
-          setError(emailError, emailInput, 'Please enter your email address.');
-          hasError = true;
-        } else if (!isValidEmail(emailInput.value.trim())) {
-          setError(emailError, emailInput, 'Please enter a valid email address (e.g., name@domain.com).');
-          hasError = true;
-        } else {
-          clearError(emailError, emailInput);
+        const matches = MENU_LOOKUP.filter(item => {
+          return item.name.toLowerCase().includes(query) ||
+                 item.cat.toLowerCase().includes(query);
+        });
+
+        if (matches.length === 0) {
+          resultsBox.hidden = false;
+          resultsBox.innerHTML = `
+            <div style="padding: 12px; font-size: 0.85rem; color: var(--text-muted); text-align: center;">
+              No matching menu item found for "${input.value}". Suggest it below in our Drink Wishlist!
+            </div>
+          `;
+          return;
         }
 
-        // Validate Message
-        if (!messageInput.value.trim()) {
-          setError(messageError, messageInput, 'Please enter your message or inquiry.');
-          hasError = true;
-        } else {
-          clearError(messageError, messageInput);
-        }
-
-        if (hasError) return;
-
-        // Simulate Submission UI
-        if (submitBtn) {
-          submitBtn.disabled = true;
-          submitBtn.classList.add('loading');
-          const submitText = submitBtn.querySelector('span');
-          if (submitText) submitText.textContent = 'Sending Message...';
-        }
-
-        setTimeout(() => {
-          form.reset();
-          if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.classList.remove('loading');
-            const submitText = submitBtn.querySelector('span');
-            if (submitText) submitText.textContent = 'Send Message';
-          }
-
-          if (formStatus) {
-            formStatus.className = 'form-status success';
-            formStatus.textContent = 'Thank you! Your message has been received. Our team will get back to you shortly.';
-          }
-        }, 800);
+        resultsBox.hidden = false;
+        resultsBox.innerHTML = matches.map(item => `
+          <div class="finder-item-row">
+            <div>
+              <span class="finder-item-name">${item.name}</span>
+              <span class="finder-item-cat">${item.cat}</span>
+            </div>
+            <span class="finder-item-price">${item.price}</span>
+          </div>
+        `).join('');
       });
+
+      if (clearBtn) {
+        clearBtn.addEventListener('click', () => {
+          input.value = '';
+          clearBtn.hidden = true;
+          resultsBox.hidden = true;
+          resultsBox.innerHTML = '';
+          input.focus();
+        });
+      }
     };
 
     return { init };
   })();
 
   /* ==========================================================================
-     APPLICATION INITIALIZATION
+     4. CUSTOMER VOICE & DRINK WISHLIST MODULE
+     ========================================================================== */
+  const CommunityWishlistModule = (() => {
+    const btnWishlist = document.getElementById('btn-mode-wishlist');
+    const btnReview = document.getElementById('btn-mode-review');
+    const activeModeInput = document.getElementById('active-mode-input');
+
+    const form = document.getElementById('community-input-form');
+    const authorInput = document.getElementById('input-author');
+    const wishTitleInput = document.getElementById('input-wish-title');
+    const wishCatSelect = document.getElementById('select-wish-category');
+    const favDrinkInput = document.getElementById('input-fav-drink');
+    const starValInput = document.getElementById('input-star-val');
+    const starBtns = document.querySelectorAll('.star-item');
+    const messageInput = document.getElementById('input-message');
+    const messageLabel = document.getElementById('label-message');
+    const noticeBox = document.getElementById('submit-notice');
+
+    const fieldsWishlist = document.getElementById('fields-wishlist');
+    const fieldsReview = document.getElementById('fields-review');
+
+    const listContainer = document.getElementById('community-items-list');
+    const filterBtns = document.querySelectorAll('.board-filter-btn');
+
+    const STORAGE_KEY = 'cafe-placedo-community-v5';
+    const VOTES_KEY = 'cafe-placedo-votes-v5';
+    const MY_ITEMS_KEY = 'cafe-placedo-my-submissions-v5';
+
+    // Clear previous storage keys so all prior test submissions are immediately wiped
+    try {
+      [
+        'cafe-placedo-community-v4',
+        'cafe-placedo-community-v3',
+        'cafe-placedo-community-v2',
+        'cafe-placedo-community',
+        'cafe-placedo-my-submissions',
+        'cafe-placedo-votes-v4',
+        'cafe-placedo-votes-v3'
+      ].forEach(k => localStorage.removeItem(k));
+    } catch (e) {}
+
+    // Authentic Initial Entries
+    const DEFAULT_ENTRIES = [
+      {
+        id: 'w1',
+        type: 'wishlist',
+        title: 'Dirty Matcha Latte',
+        author: 'Alyzza (Rizal Local)',
+        category: 'Specialty Coffee',
+        message: 'A shot of your bold espresso over creamy ceremonial matcha would be amazing! Perfect afternoon energy boost.',
+        votes: 38,
+        date: 'Recent'
+      },
+      {
+        id: 'w2',
+        type: 'review',
+        title: 'Seasalt Spanish Latte & Canton Overload',
+        author: 'Mark Kevin (Cabanatuan)',
+        rating: 5,
+        message: 'The Seasalt Spanish Latte here is legit. Perfectly balanced sea salt foam, plus the evening patio vibe is super chill.',
+        votes: 45,
+        date: '2 days ago'
+      },
+      {
+        id: 'w3',
+        type: 'wishlist',
+        title: 'Cheesy Croffle with Caramel',
+        author: 'Camille (Sta. Monica)',
+        category: 'Pastry / Snack',
+        message: 'Warm crispy croffles topped with caramel drizzle to pair with Biscoffee at night! Hope this gets added soon!',
+        votes: 27,
+        date: 'Recent'
+      },
+      {
+        id: 'w4',
+        type: 'review',
+        title: 'Snow Dream Choco',
+        author: 'Joshua P.',
+        rating: 5,
+        message: 'Snow Dream Choco with marshmallows is super comforting. Hometown favorite!',
+        votes: 19,
+        date: '4 days ago'
+      }
+    ];
+
+    const DEFAULT_IDS = new Set(DEFAULT_ENTRIES.map(e => e.id));
+
+    let items = [];
+    let votedIds = new Set();
+    let mySubmissions = new Set();
+    let currentFilter = 'all';
+
+    const saveState = () => {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
+        localStorage.setItem(VOTES_KEY, JSON.stringify(Array.from(votedIds)));
+        localStorage.setItem(MY_ITEMS_KEY, JSON.stringify(Array.from(mySubmissions)));
+      } catch (err) {}
+    };
+
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      items = saved ? JSON.parse(saved) : [...DEFAULT_ENTRIES];
+      const votes = localStorage.getItem(VOTES_KEY);
+      if (votes) votedIds = new Set(JSON.parse(votes));
+      const myItems = localStorage.getItem(MY_ITEMS_KEY);
+      if (myItems) mySubmissions = new Set(JSON.parse(myItems));
+    } catch (e) {
+      items = [...DEFAULT_ENTRIES];
+    }
+
+    const renderList = () => {
+      if (!listContainer) return;
+
+      const filtered = items.filter(it => {
+        if (currentFilter === 'all') return true;
+        return it.type === currentFilter;
+      });
+
+      if (filtered.length === 0) {
+        listContainer.innerHTML = `
+          <div style="padding: 24px; text-align: center; color: var(--text-muted); font-size: 0.9rem;">
+            No items in this category yet. Be the first to submit!
+          </div>
+        `;
+        return;
+      }
+
+      listContainer.innerHTML = filtered.map(it => {
+        const isWish = it.type === 'wishlist';
+        const hasVoted = votedIds.has(it.id);
+        const isUserItem = !DEFAULT_IDS.has(it.id) || mySubmissions.has(it.id);
+
+        let typeBadge = '';
+        if (isWish) {
+          typeBadge = `<span class="card-type-tag">Wishlist: ${it.category || 'Drink'}</span>`;
+        } else {
+          typeBadge = `<span class="card-type-tag review">${it.rating || 5}/5 Rating</span>`;
+        }
+
+        const deleteBtn = isUserItem ? `
+          <button type="button" class="btn-delete-submission" data-delete-id="${it.id}" aria-label="Delete my comment" title="Delete my comment">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+            <span>Delete my comment</span>
+          </button>
+        ` : '';
+
+        return `
+          <article class="community-card ${isUserItem ? 'my-submission' : ''}" data-id="${it.id}">
+            <div class="card-top">
+              ${typeBadge}
+              <div class="card-top-right">
+                <span class="card-date">${it.date || 'Recent'}</span>
+                ${deleteBtn}
+              </div>
+            </div>
+            <h4 class="card-title">${escapeHTML(it.title)}</h4>
+            <p class="card-text">${escapeHTML(it.message)}</p>
+            <div class="card-footer">
+              <span class="card-author">${escapeHTML(it.author)}</span>
+              <button type="button" class="btn-upvote ${hasVoted ? 'voted' : ''}" data-upvote="${it.id}">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="${hasVoted ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                </svg>
+                <span>${it.votes || 0} ${isWish ? 'Wants' : 'Likes'}</span>
+              </button>
+            </div>
+          </article>
+        `;
+      }).join('');
+    };
+
+    const escapeHTML = (str) => {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    };
+
+    const setMode = (mode) => {
+      if (activeModeInput) activeModeInput.value = mode;
+
+      if (mode === 'wishlist') {
+        if (btnWishlist) {
+          btnWishlist.classList.add('active');
+          btnWishlist.setAttribute('aria-selected', 'true');
+        }
+        if (btnReview) {
+          btnReview.classList.remove('active');
+          btnReview.setAttribute('aria-selected', 'false');
+        }
+        if (fieldsWishlist) fieldsWishlist.hidden = false;
+        if (fieldsReview) fieldsReview.hidden = true;
+        if (messageLabel) {
+          messageLabel.innerHTML = 'Why should Café de Place-do add this? <span class="req">*</span>';
+        }
+      } else {
+        if (btnReview) {
+          btnReview.classList.add('active');
+          btnReview.setAttribute('aria-selected', 'true');
+        }
+        if (btnWishlist) {
+          btnWishlist.classList.remove('active');
+          btnWishlist.setAttribute('aria-selected', 'false');
+        }
+        if (fieldsWishlist) fieldsWishlist.hidden = true;
+        if (fieldsReview) fieldsReview.hidden = false;
+        if (messageLabel) {
+          messageLabel.innerHTML = 'How was your drink or visit? <span class="req">*</span>';
+        }
+      }
+    };
+
+    const init = () => {
+      renderList();
+
+      // Mode toggles
+      if (btnWishlist) btnWishlist.addEventListener('click', () => setMode('wishlist'));
+      if (btnReview) btnReview.addEventListener('click', () => setMode('review'));
+
+      // Suggestion Chips
+      document.querySelectorAll('.chip-btn').forEach(chip => {
+        chip.addEventListener('click', () => {
+          if (wishTitleInput) {
+            wishTitleInput.value = chip.dataset.value || '';
+          }
+          if (wishCatSelect && chip.dataset.cat) {
+            wishCatSelect.value = chip.dataset.cat;
+          }
+          if (messageInput) messageInput.focus();
+        });
+      });
+
+      // Star rating
+      starBtns.forEach(star => {
+        star.addEventListener('click', () => {
+          const val = parseInt(star.dataset.val, 10);
+          if (starValInput) starValInput.value = String(val);
+          starBtns.forEach(s => {
+            const sVal = parseInt(s.dataset.val, 10);
+            s.classList.toggle('active', sVal <= val);
+          });
+        });
+      });
+
+      // Filter tabs
+      filterBtns.forEach(b => {
+        b.addEventListener('click', () => {
+          filterBtns.forEach(btn => btn.classList.remove('active'));
+          b.classList.add('active');
+          currentFilter = b.dataset.filter || 'all';
+          renderList();
+        });
+      });
+
+      // Upvoting & Deleting click handler
+      if (listContainer) {
+        listContainer.addEventListener('click', (e) => {
+          // Delete handling: removes user comment/request
+          const delBtn = e.target.closest('[data-delete-id]');
+          if (delBtn) {
+            const id = delBtn.dataset.deleteId;
+            items = items.filter(it => it.id !== id);
+            mySubmissions.delete(id);
+            votedIds.delete(id);
+            saveState();
+            renderList();
+            if (noticeBox) {
+              noticeBox.className = 'form-notice';
+              noticeBox.textContent = 'Your comment has been deleted.';
+              setTimeout(() => { if (noticeBox) noticeBox.textContent = ''; }, 3000);
+            }
+            return;
+          }
+
+          // Upvote handling
+          const upBtn = e.target.closest('[data-upvote]');
+          if (!upBtn) return;
+
+          const id = upBtn.dataset.upvote;
+          const target = items.find(it => it.id === id);
+          if (!target) return;
+
+          if (votedIds.has(id)) {
+            votedIds.delete(id);
+            target.votes = Math.max(0, (target.votes || 1) - 1);
+          } else {
+            votedIds.add(id);
+            target.votes = (target.votes || 0) + 1;
+          }
+
+          saveState();
+          renderList();
+        });
+      }
+
+      // Form submission
+      if (form) {
+        form.addEventListener('submit', (e) => {
+          e.preventDefault();
+
+          const mode = activeModeInput ? activeModeInput.value : 'wishlist';
+          const author = authorInput ? authorInput.value.trim() : '';
+          const msg = messageInput ? messageInput.value.trim() : '';
+
+          let valid = true;
+
+          const errAuthor = document.getElementById('err-author');
+          const errWishTitle = document.getElementById('err-wish-title');
+          const errMessage = document.getElementById('err-message');
+
+          if (errAuthor) errAuthor.textContent = '';
+          if (errWishTitle) errWishTitle.textContent = '';
+          if (errMessage) errMessage.textContent = '';
+
+          if (!author) {
+            if (errAuthor) errAuthor.textContent = 'Please enter your name.';
+            valid = false;
+          }
+
+          let title = '';
+          if (mode === 'wishlist') {
+            title = wishTitleInput ? wishTitleInput.value.trim() : '';
+            if (!title) {
+              if (errWishTitle) errWishTitle.textContent = 'Please specify the drink or food.';
+              valid = false;
+            }
+          } else {
+            title = favDrinkInput && favDrinkInput.value.trim() ? favDrinkInput.value.trim() : 'Place-do Visit';
+          }
+
+          if (!msg) {
+            if (errMessage) errMessage.textContent = 'Please enter a short message.';
+            valid = false;
+          }
+
+          if (!valid) return;
+
+          const newItem = {
+            id: 'item_' + Date.now(),
+            type: mode,
+            title: title,
+            author: author,
+            category: wishCatSelect ? wishCatSelect.value : 'Specialty Coffee',
+            rating: starValInput ? parseInt(starValInput.value, 10) : 5,
+            message: msg,
+            votes: 1,
+            date: 'Just now'
+          };
+
+          items.unshift(newItem);
+          mySubmissions.add(newItem.id);
+          votedIds.add(newItem.id);
+          saveState();
+
+          form.reset();
+          if (noticeBox) {
+            noticeBox.className = 'form-notice success';
+            noticeBox.innerHTML = `
+              <span>${mode === 'wishlist' ? 'Thank you! Your drink request was added.' : 'Thank you! Your review was posted.'}</span>
+              <button type="button" class="btn-undo-notice" id="btn-undo-action">Delete my comment</button>
+            `;
+            const undoBtn = document.getElementById('btn-undo-action');
+            if (undoBtn) {
+              undoBtn.addEventListener('click', () => {
+                items = items.filter(it => it.id !== newItem.id);
+                mySubmissions.delete(newItem.id);
+                votedIds.delete(newItem.id);
+                saveState();
+                renderList();
+                noticeBox.className = 'form-notice';
+                noticeBox.textContent = 'Your comment has been deleted.';
+                setTimeout(() => { if (noticeBox) noticeBox.textContent = ''; }, 3000);
+              });
+            }
+            setTimeout(() => {
+              if (noticeBox && noticeBox.querySelector('#btn-undo-action')) {
+                noticeBox.textContent = '';
+              }
+            }, 8000);
+          }
+
+          renderList();
+        });
+      }
+    };
+
+    return { init };
+  })();
+
+  /* ==========================================================================
+     INITIALIZATION ON DOM CONTENT LOADED
      ========================================================================== */
   document.addEventListener('DOMContentLoaded', () => {
-    NavigationModule.init();
     ThemeModule.init();
-    CustomizerModule.init();
-    ContactFormModule.init();
+    NavigationModule.init();
+    MenuSheetsModule.init();
+    DrinksFilterModule.init();
+    QuickFinderModule.init();
+    CommunityWishlistModule.init();
   });
+
 })();

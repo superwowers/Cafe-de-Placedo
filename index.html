@@ -3,49 +3,64 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Café de Place-do - Handcrafted espresso, signature matcha lattes, and artisan chocolate drinks in a warm, welcoming outdoor community ambiance. Est. 2025.">
-  <title>Café de Place-do | Handcrafted Coffee & Specialty Drinks</title>
+  <meta name="description" content="Café de Place-do - Inspired by our surname Placido, your cozy “Place” to “Do” life and coffee. Open daily 1pm - 10pm in Betis, Sta. Monica, Rizal, Nueva Ecija.">
+  <title>Café de Place-do | Your Place to Do Life & Coffee • Rizal, Nueva Ecija</title>
 
   <!-- Google Fonts Preconnect & Stylesheet -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;0,800;0,900;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
 
-  <!-- Relative Link to Project Stylesheet -->
+  <!-- Theme Script (Zero Flash) -->
+  <script>
+    (() => {
+      try {
+        const saved = localStorage.getItem('cafe-placedo-theme');
+        if (saved === 'dark') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Relative Link to Stylesheet -->
   <link rel="stylesheet" href="./style.css">
 
-  <!-- Favicon Reference -->
+  <!-- Favicon -->
   <link rel="icon" type="image/jpeg" href="./assets/logo.jpg">
 </head>
 <body>
   <!-- Accessible Skip to Content Link -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <!-- Header / Navigation Landmark -->
+  <!-- Minimal Header & Navigation -->
   <header class="site-header" role="banner">
     <div class="header-container">
       <a href="#hero" class="brand" aria-label="Café de Place-do Home">
-        <img src="./assets/logo.jpg" alt="Café de Place-do logo - Est. 2025" class="brand-logo" width="44" height="44">
-        <span class="brand-name">Café de <span class="brand-accent">place-do</span></span>
+        <img src="./assets/logo.jpg" alt="Café de Place-do logo" class="brand-logo" width="40" height="40">
+        <div class="brand-one-line">
+          <span class="brand-cafe-de-inline">CAFÉ DE</span>
+          <span class="brand-title-inline"><span class="brand-place-inline">place</span><span class="brand-do-inline">-do</span></span>
+          <span class="brand-sibs-inline">BY SIBS</span>
+        </div>
       </a>
 
-      <!-- Primary Navigation -->
+      <!-- Clean Navigation -->
       <nav class="site-nav" id="primary-navigation" aria-label="Primary Navigation">
         <ul class="nav-list" role="list">
-          <li class="nav-item"><a href="#hero" class="nav-link">Home</a></li>
-          <li class="nav-item"><a href="#about" class="nav-link">About</a></li>
-          <li class="nav-item"><a href="#menu" class="nav-link">Menu</a></li>
-          <li class="nav-item"><a href="#interactive-container" class="nav-link">Customizer</a></li>
-          <li class="nav-item"><a href="#community" class="nav-link">Experience</a></li>
-          <li class="nav-item"><a href="#contact" class="nav-link">Contact</a></li>
+          <li class="nav-item"><a href="#showcase" class="nav-link">Available Now</a></li>
+          <li class="nav-item"><a href="#menu" class="nav-link">Menu Boards</a></li>
+          <li class="nav-item"><a href="#wishlist" class="nav-link">Drink Wishlist</a></li>
+          <li class="nav-item"><a href="#visit" class="nav-link">Visit Us</a></li>
         </ul>
       </nav>
 
-      <!-- Header Controls: Theme Toggle & Hamburger Menu -->
+      <!-- Action Button, Dark Mode Toggle & Mobile Toggle -->
       <div class="header-actions">
-        <button type="button" class="theme-toggle-btn" id="theme-toggle" aria-label="Switch between light and dark mode" aria-pressed="false">
-          <!-- Sun Icon (shown in dark mode) -->
-          <svg class="theme-icon icon-sun" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <button type="button" class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+          <svg class="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <circle cx="12" cy="12" r="5"></circle>
             <line x1="12" y1="1" x2="12" y2="3"></line>
             <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -56,734 +71,967 @@
             <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
             <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
           </svg>
-          <!-- Moon Icon (shown in light mode) -->
-          <svg class="theme-icon icon-moon" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg class="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
         </button>
 
-        <button type="button" class="menu-toggle-btn" id="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Open navigation menu">
-          <span class="hamburger-bar"></span>
-          <span class="hamburger-bar"></span>
-          <span class="hamburger-bar"></span>
+        <a href="https://m.me/cafedeplacedo" target="_blank" rel="noopener noreferrer" class="btn btn-header">
+          <span>Message on Facebook</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="7" y1="17" x2="17" y2="7"></line>
+            <polyline points="7 7 17 7 17 17"></polyline>
+          </svg>
+        </a>
+
+        <button type="button" class="menu-toggle-btn" id="menu-toggle" aria-controls="primary-navigation" aria-expanded="false" aria-label="Toggle navigation menu">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
         </button>
       </div>
     </div>
   </header>
 
-  <!-- Main Content Landmark -->
+  <!-- Main Content -->
   <main id="main-content" role="main">
 
     <!-- 1. Hero Section -->
-    <section id="hero" class="hero-section" aria-labelledby="hero-heading">
-      <div class="hero-container">
-        <div class="hero-content">
-          <span class="hero-badge">Artisanal Coffee & Beverage Stall • Est. 2025</span>
-          <h1 id="hero-heading" class="hero-title">Every Sip Inspires Warmth and Connection</h1>
-          <p class="hero-description">
-            Welcome to Café de Place-do, your local open-air escape. We craft velvety matcha lattes, rich specialty chocolates, and signature espresso beverages served fresh from our illuminated timber brew bar.
+    <section id="hero" class="hero-section" aria-labelledby="hero-title">
+      <div class="container hero-container">
+        <div class="hero-copy">
+          <h1 id="hero-title" class="hero-headline">
+            Your Place to <span class="serif-accent">Do Life</span> & <span class="brand-do">Coffee</span>
+          </h1>
+
+          <p class="hero-origin-quote">
+            &ldquo;inspired by our surname <strong>Placido</strong>, your cozy &ldquo;Place&rdquo; to &ldquo;Do&rdquo; life and coffee&rdquo;
           </p>
-          <div class="hero-cta-group">
-            <a href="#menu" class="btn btn-primary">Browse Our Menu</a>
-            <a href="#contact" class="btn btn-secondary">Find Our Location</a>
+
+          <p class="hero-location-text">
+            Handcrafted espresso brews, seasalt foam signatures, pure matcha, and warm comfort food in <strong>Betis, Sta. Monica, Rizal, Nueva Ecija</strong> (along the highway, in front of the irrigation).
+          </p>
+
+          <div class="hero-buttons">
+            <a href="#showcase" class="btn btn-primary">See Available Menu</a>
+            <a href="#menu" class="btn btn-secondary">View Menu Boards</a>
+            <a href="#wishlist" class="btn btn-secondary">Request Drink / Dish</a>
           </div>
-          <div class="hero-highlights" role="list">
-            <div class="highlight-item" role="listitem">
-              <span class="highlight-metric">100%</span>
-              <span class="highlight-label">Fresh Brewed</span>
+
+          <div class="hero-info-pills">
+            <div class="info-pill">
+              <span class="pill-label">Location</span>
+              <span class="pill-val">Rizal, Nueva Ecija</span>
             </div>
-            <div class="highlight-item" role="listitem">
-              <span class="highlight-metric">Ceremonial</span>
-              <span class="highlight-label">Pure Grade Matcha</span>
+            <div class="info-pill">
+              <span class="pill-label">Hours</span>
+              <span class="pill-val">Daily 1 PM &ndash; 10 PM</span>
             </div>
-            <div class="highlight-item" role="listitem">
-              <span class="highlight-metric">Al Fresco</span>
-              <span class="highlight-label">Cozy Hangout</span>
+            <div class="info-pill">
+              <span class="pill-label">Vibe</span>
+              <span class="pill-val">Al Fresco Patio</span>
             </div>
           </div>
         </div>
 
-        <div class="hero-visual">
-          <figure class="hero-figure">
-            <img src="./assets/place.jpg" alt="Café de Place-do handcrafted wooden espresso bar with warm under-counter lighting and freshly prepared drinks" class="hero-image" width="540" height="720">
+        <div class="hero-media">
+          <figure class="hero-card">
+            <img src="./assets/place.jpg" alt="Café de Place-do handcrafted timber espresso bar stall in Rizal, Nueva Ecija" class="hero-img" width="560" height="700">
             <figcaption class="hero-caption">
-              <strong>Our Artisan Brew Bar</strong>
-              <span>Warm vibes, freshly poured daily</span>
+              <strong>Our Artisan Brew Stall</strong>
+              <span>Betis, Sta. Monica, Rizal, Nueva Ecija</span>
             </figcaption>
           </figure>
         </div>
       </div>
     </section>
 
-    <!-- 2. About Us Section -->
-    <section id="about" class="about-section" aria-labelledby="about-heading">
+    <!-- 2. Available Menu Showcase (Drinks & Comfort Food) -->
+    <section id="showcase" class="items-showcase-section" aria-labelledby="showcase-heading">
       <div class="container">
-        <header class="section-header">
-          <span class="section-tag">Our Story</span>
-          <h2 id="about-heading" class="section-title">Rooted in Craft, Served with Heart</h2>
-          <p class="section-subtitle">A neighborhood sanctuary where comfort meets artisanal drink creations.</p>
-        </header>
+        <div class="section-title-wrap">
+          <span class="eyebrow">Available at Place-do</span>
+          <h2 id="showcase-heading" class="section-heading">Drinks &amp; Comfort Food</h2>
+          <p class="section-desc">
+            Handcrafted beverages and freshly prepared comfort food served daily at our outdoor stall.
+          </p>
+        </div>
 
-        <div class="about-grid">
-          <article class="about-card">
-            <div class="about-icon-wrapper" aria-hidden="true">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
-                <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
-                <line x1="6" y1="1" x2="6" y2="4"></line>
-                <line x1="10" y1="1" x2="10" y2="4"></line>
-                <line x1="14" y1="1" x2="14" y2="4"></line>
-              </svg>
+        <!-- Items Filter Bar -->
+        <div class="items-filter-bar" role="tablist" aria-label="Filter available items">
+          <button type="button" class="item-filter-btn active" data-category="all" role="tab" aria-selected="true">
+            <span>All Items (18)</span>
+          </button>
+          <button type="button" class="item-filter-btn" data-category="signature" role="tab" aria-selected="false">
+            <span>Signatures</span>
+          </button>
+          <button type="button" class="item-filter-btn" data-category="espresso" role="tab" aria-selected="false">
+            <span>Espresso &amp; Lattes</span>
+          </button>
+          <button type="button" class="item-filter-btn" data-category="matcha" role="tab" aria-selected="false">
+            <span>Matcha Series</span>
+          </button>
+          <button type="button" class="item-filter-btn" data-category="biscoff-noncoffee" role="tab" aria-selected="false">
+            <span>Biscoff &amp; Sweets</span>
+          </button>
+          <button type="button" class="item-filter-btn" data-category="comfort-food" role="tab" aria-selected="false">
+            <span>Comfort Food &amp; Snacks</span>
+          </button>
+        </div>
+
+        <!-- Drinks Cards Grid -->
+        <div class="drinks-grid" id="drinks-grid">
+
+          <!-- 1. Snow Dream Choco -->
+          <article class="drink-card" data-category="signature">
+            <div class="drink-media">
+              <img src="./assets/snow_dream_choco.png" alt="Snow Dream Choco with fluffy marshmallows and chocolate sauce drizzle at Cafe de Place-do" class="drink-img" loading="lazy">
+              <span class="drink-badge">Best Seller</span>
+              <button type="button" class="btn-drink-zoom" data-zoom-target="./assets/snow_dream_choco.png" aria-label="View Snow Dream Choco photo full-screen">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  <line x1="11" y1="8" x2="11" y2="14"></line>
+                  <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+              </button>
             </div>
-            <h3 class="about-card-title">Crafted Beverages</h3>
-            <p class="about-card-text">From decadent chocolate swirls to smooth espresso, every recipe is carefully balanced to bring out comforting flavors in every cup.</p>
+            <div class="drink-body">
+              <div class="drink-top-row">
+                <h3 class="drink-title">Snow Dream Choco</h3>
+                <span class="drink-price">₱95.00</span>
+              </div>
+              <span class="drink-tag">Signature &bull; Non-Coffee</span>
+              <p class="drink-desc">
+                Rich iced chocolate crowned with pillowy marshmallows and decadent chocolate syrup drizzle. Pure comfort in a cup.
+              </p>
+            </div>
           </article>
 
-          <article class="about-card">
-            <div class="about-icon-wrapper" aria-hidden="true">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"></path>
-                <path d="M12 6v6l4 2"></path>
-              </svg>
+          <!-- 2. Tres Leches Caramel -->
+          <article class="drink-card" data-category="signature">
+            <div class="drink-media">
+              <img src="./assets/tres_leches_caramel.png" alt="Tres Leches Caramel with dripping caramel streaks and espresso at Cafe de Place-do" class="drink-img" loading="lazy">
+              <span class="drink-badge">Specialty</span>
+              <button type="button" class="btn-drink-zoom" data-zoom-target="./assets/tres_leches_caramel.png" aria-label="View Tres Leches Caramel photo full-screen">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  <line x1="11" y1="8" x2="11" y2="14"></line>
+                  <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+              </button>
             </div>
-            <h3 class="about-card-title">Signature Matcha</h3>
-            <p class="about-card-text">We source vibrant, authentic matcha ground finely to create our famous Seasalt Matcha, Matcha Oreo Cream, and Matcha Coffee Latte blends.</p>
+            <div class="drink-body">
+              <div class="drink-top-row">
+                <h3 class="drink-title">Tres Leches Caramel</h3>
+                <span class="drink-price">₱125.00</span>
+              </div>
+              <span class="drink-tag">Signature &bull; Iced Coffee</span>
+              <p class="drink-desc">
+                Rich triple-milk blend with golden caramel walls and freshly pulled espresso. Luxuriously sweet and smooth.
+              </p>
+            </div>
           </article>
 
-          <article class="about-card">
-            <div class="about-icon-wrapper" aria-hidden="true">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="9" cy="7" r="4"></circle>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-              </svg>
+          <!-- 3. Spanish Latte -->
+          <article class="drink-card" data-category="espresso">
+            <div class="drink-media">
+              <img src="./assets/spanish_latte_pair.png" alt="Spanish Latte cups with signature quote Slow down You're doing fine at Cafe de Place-do" class="drink-img" loading="lazy">
+              <span class="drink-badge">Top Favorite</span>
+              <button type="button" class="btn-drink-zoom" data-zoom-target="./assets/spanish_latte_pair.png" aria-label="View Spanish Latte photo full-screen">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  <line x1="11" y1="8" x2="11" y2="14"></line>
+                  <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+              </button>
             </div>
-            <h3 class="about-card-title">Community Haven</h3>
-            <p class="about-card-text">Designed as a relaxed open-air space where friends gather, stories unfold, and everyone feels right at home under gentle evening lighting.</p>
+            <div class="drink-body">
+              <div class="drink-top-row">
+                <h3 class="drink-title">Spanish Latte</h3>
+                <span class="drink-price">₱75 / ₱89</span>
+              </div>
+              <span class="drink-tag">Espresso &bull; Iced / Hot</span>
+              <p class="drink-desc">
+                Our #1 crowd pleaser. Sweetened condensed milk and bold espresso served with our reminder: <em>&ldquo;Slow down. You're doing fine.&rdquo;</em>
+              </p>
+            </div>
           </article>
+
+          <!-- 4. Have Some Choco Latte -->
+          <article class="drink-card" data-category="biscoff-noncoffee">
+            <div class="drink-media">
+              <img src="./assets/choco_latte.png" alt="Have Some Choco Latte with cream and chocolate latte art at Cafe de Place-do" class="drink-img" loading="lazy">
+              <span class="drink-badge">Non-Coffee</span>
+              <button type="button" class="btn-drink-zoom" data-zoom-target="./assets/choco_latte.png" aria-label="View Choco Latte photo full-screen">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  <line x1="11" y1="8" x2="11" y2="14"></line>
+                  <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+              </button>
+            </div>
+            <div class="drink-body">
+              <div class="drink-top-row">
+                <h3 class="drink-title">Choco Latte</h3>
+                <span class="drink-price">₱85.00</span>
+              </div>
+              <span class="drink-tag">Non-Coffee &bull; Classic</span>
+              <p class="drink-desc">
+                Deep rich chocolate base topped with velvety fresh milk foam and artisanal chocolate syrup swirls.
+              </p>
+            </div>
+          </article>
+
+          <!-- 5. Matcha Fam (Oreo Cream & Seasalt) -->
+          <article class="drink-card" data-category="matcha">
+            <div class="drink-media">
+              <img src="./assets/matcha_fam.jpg" alt="Matcha Fam trio: Matcha Oreo Cream, Matcha Coffee Latte, and Seasalt Matcha Latte" class="drink-img" loading="lazy">
+              <span class="drink-badge">Matcha Trio</span>
+              <button type="button" class="btn-drink-zoom" data-zoom-target="./assets/matcha_fam.jpg" aria-label="View Matcha Fam photo full-screen">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  <line x1="11" y1="8" x2="11" y2="14"></line>
+                  <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+              </button>
+            </div>
+            <div class="drink-body">
+              <div class="drink-top-row">
+                <h3 class="drink-title">Matcha Fam Collection</h3>
+                <span class="drink-price">₱85 – ₱105</span>
+              </div>
+              <span class="drink-tag">Matcha Series &bull; Pure Tea</span>
+              <p class="drink-desc">
+                Three distinct expressions: crunchy Matcha Oreo Cream, bold Matcha Coffee Latte, and savory Seasalt Matcha Latte.
+              </p>
+            </div>
+          </article>
+
+          <!-- 6. Strawberry Matcha -->
+          <article class="drink-card" data-category="matcha">
+            <div class="drink-media">
+              <img src="./assets/strawberry_matcha.png" alt="Layered Strawberry Matcha drink at Cafe de Place-do" class="drink-img" loading="lazy">
+              <span class="drink-badge">New Favorite</span>
+              <button type="button" class="btn-drink-zoom" data-zoom-target="./assets/strawberry_matcha.png" aria-label="View Strawberry Matcha photo full-screen">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  <line x1="11" y1="8" x2="11" y2="14"></line>
+                  <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+              </button>
+            </div>
+            <div class="drink-body">
+              <div class="drink-top-row">
+                <h3 class="drink-title">Strawberry Matcha</h3>
+                <span class="drink-price">₱95.00</span>
+              </div>
+              <span class="drink-tag">Matcha Series &bull; Fruit Layer</span>
+              <p class="drink-desc">
+                Handcrafted tri-color layers of real sweet strawberry puree, chilled whole milk, and rich whisked Japanese matcha green tea.
+              </p>
+            </div>
+          </article>
+
+          <!-- 7. Vanilla Latte & Oreo Latte -->
+          <article class="drink-card" data-category="espresso">
+            <div class="drink-media">
+              <img src="./assets/vanilla_oreo_latte.png" alt="Vanilla Latte and Oreo Latte cups side by side at Cafe de Place-do" class="drink-img" loading="lazy">
+              <span class="drink-badge">Duo Favorites</span>
+              <button type="button" class="btn-drink-zoom" data-zoom-target="./assets/vanilla_oreo_latte.png" aria-label="View Vanilla and Oreo Latte photo full-screen">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  <line x1="11" y1="8" x2="11" y2="14"></line>
+                  <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+              </button>
+            </div>
+            <div class="drink-body">
+              <div class="drink-top-row">
+                <h3 class="drink-title">Vanilla & Oreo Latte</h3>
+                <span class="drink-price">₱75 – ₱85</span>
+              </div>
+              <span class="drink-tag">Coffee &amp; Cream Classics</span>
+              <p class="drink-desc">
+                Smooth Vanilla espresso latte alongside our rich Oreo Latte topped with crunchy chocolate cookie bits and cloud foam.
+              </p>
+            </div>
+          </article>
+
+          <!-- 8. Biscoff Milk -->
+          <article class="drink-card" data-category="biscoff-noncoffee">
+            <div class="drink-media">
+              <img src="./assets/biscoff_milk_trio.jpg" alt="Biscoff Milk cups with thick foam and crushed Lotus Biscoff cookies at Cafe de Place-do" class="drink-img" loading="lazy">
+              <span class="drink-badge">Biscoff Series</span>
+              <button type="button" class="btn-drink-zoom" data-zoom-target="./assets/biscoff_milk_trio.jpg" aria-label="View Biscoff Milk photo full-screen">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  <line x1="11" y1="8" x2="11" y2="14"></line>
+                  <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+              </button>
+            </div>
+            <div class="drink-body">
+              <div class="drink-top-row">
+                <h3 class="drink-title">Biscoff Milk</h3>
+                <span class="drink-price">₱115.00</span>
+              </div>
+              <span class="drink-tag">Biscoff Series &bull; Non-Coffee</span>
+              <p class="drink-desc">
+                Silky chilled milk swirled with authentic Lotus Biscoff spread, topped with fluffy cold foam and caramelized spiced biscuit crunch.
+              </p>
+            </div>
+          </article>
+
+          <!-- 9. Strawberry Oreo -->
+          <article class="drink-card" data-category="signature">
+            <div class="drink-media">
+              <img src="./assets/strawberry_oreo_single.png" alt="Why not try strawberry oreo single cup at Cafe de Place-do" class="drink-img" loading="lazy">
+              <span class="drink-badge">Specialty</span>
+              <button type="button" class="btn-drink-zoom" data-zoom-target="./assets/strawberry_oreo_single.png" aria-label="View Strawberry Oreo photo full-screen">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  <line x1="11" y1="8" x2="11" y2="14"></line>
+                  <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+              </button>
+            </div>
+            <div class="drink-body">
+              <div class="drink-top-row">
+                <h3 class="drink-title">Strawberry Oreo</h3>
+                <span class="drink-price">₱95.00</span>
+              </div>
+              <span class="drink-tag">Signature &bull; Non-Coffee</span>
+              <p class="drink-desc">
+                <em>&ldquo;Why not try Strawberry Oreo?&rdquo;</em> Sweet berry syrup base blended with creamy milk and loaded with crushed chocolate Oreos.
+              </p>
+            </div>
+          </article>
+
+          <!-- 10. Seasalt Spanish Latte & Oatside -->
+          <article class="drink-card" data-category="espresso">
+            <div class="drink-media">
+              <img src="./assets/seasalt_oatside.png" alt="Seasalt Spanish Latte with Oatside Barista oat milk at Cafe de Place-do" class="drink-img" loading="lazy">
+              <span class="drink-badge">Oatside Option</span>
+              <button type="button" class="btn-drink-zoom" data-zoom-target="./assets/seasalt_oatside.png" aria-label="View Seasalt Spanish Latte photo full-screen">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  <line x1="11" y1="8" x2="11" y2="14"></line>
+                  <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+              </button>
+            </div>
+            <div class="drink-body">
+              <div class="drink-top-row">
+                <h3 class="drink-title">Seasalt Spanish Latte</h3>
+                <span class="drink-price">₱95.00</span>
+              </div>
+              <span class="drink-tag">Seasalt Series &bull; Oatside Ready</span>
+              <p class="drink-desc">
+                Savory-sweet sea salt cold foam over rich Spanish latte. Available with 100% plant-based Oatside Barista Blend Oat Milk (+₱25).
+              </p>
+            </div>
+          </article>
+
+          <!-- 11. Flavored Lattes Trio -->
+          <article class="drink-card" data-category="espresso">
+            <div class="drink-media">
+              <img src="./assets/lattes_trio.png" alt="Butterscotch Latte, Spanish Latte, and Salted Caramel Macchiato at Cafe de Place-do" class="drink-img" loading="lazy">
+              <span class="drink-badge">Barista Picks</span>
+              <button type="button" class="btn-drink-zoom" data-zoom-target="./assets/lattes_trio.png" aria-label="View Flavored Lattes photo full-screen">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  <line x1="11" y1="8" x2="11" y2="14"></line>
+                  <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+              </button>
+            </div>
+            <div class="drink-body">
+              <div class="drink-top-row">
+                <h3 class="drink-title">Artisan Flavored Lattes</h3>
+                <span class="drink-price">₱75 – ₱99</span>
+              </div>
+              <span class="drink-tag">Espresso &bull; Flavored</span>
+              <p class="drink-desc">
+                From Butterscotch and Salted Caramel Macchiato to Hazelnut Caramel, handcrafted with genuine syrups and fresh milk.
+              </p>
+            </div>
+          </article>
+
+          <!-- 12. Biscoff Milk & Lychee Fizz -->
+          <article class="drink-card" data-category="biscoff-noncoffee">
+            <div class="drink-media">
+              <img src="./assets/biscoff_lychee.png" alt="Biscoff Milk and sparkling Lychee Fizz duo at Cafe de Place-do" class="drink-img" loading="lazy">
+              <span class="drink-badge">Duo Pair</span>
+              <button type="button" class="btn-drink-zoom" data-zoom-target="./assets/biscoff_lychee.png" aria-label="View Biscoff Milk and Lychee Fizz photo full-screen">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  <line x1="11" y1="8" x2="11" y2="14"></line>
+                  <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+              </button>
+            </div>
+            <div class="drink-body">
+              <div class="drink-top-row">
+                <h3 class="drink-title">Biscoff Milk & Lychee Fizz</h3>
+                <span class="drink-price">₱49 – ₱115</span>
+              </div>
+              <span class="drink-tag">Sweets &bull; Fruit Soda</span>
+              <p class="drink-desc">
+                Two sides of refreshment: decadent caramel-spiced Biscoff Milk paired with our fizzy sparkling Lychee soda refresher.
+              </p>
+            </div>
+          </article>
+
+          <!-- 13. Comfort Rice Meals -->
+          <article class="drink-card" data-category="comfort-food">
+            <div class="drink-media">
+              <img src="./assets/rice_meals_quad.jpg" alt="Comfort Rice Meals with chicken poppers and hungarian sausage at Cafe de Place-do" class="drink-img" loading="lazy">
+              <span class="drink-badge">Rice Meal</span>
+              <button type="button" class="btn-drink-zoom" data-zoom-target="./assets/rice_meals_quad.jpg" aria-label="View Comfort Rice Meals photo full-screen">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  <line x1="11" y1="8" x2="11" y2="14"></line>
+                  <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+              </button>
+            </div>
+            <div class="drink-body">
+              <div class="drink-top-row">
+                <h3 class="drink-title">Comfort Rice Plates</h3>
+                <span class="drink-price">₱109.00</span>
+              </div>
+              <span class="drink-tag">Comfort Food &bull; Hearty Meal</span>
+              <p class="drink-desc">
+                Steaming garlic rice served with sunny fried egg, mixed veggies, and your choice of crispy chicken poppers or Hungarian sausage.
+              </p>
+            </div>
+          </article>
+
+          <!-- 14. Beef Tapa & Rice -->
+          <article class="drink-card" data-category="comfort-food">
+            <div class="drink-media">
+              <img src="./assets/beef_tapa_rice.jpg" alt="Tender marinated beef tapa with garlic rice and egg at Cafe de Place-do" class="drink-img" loading="lazy">
+              <span class="drink-badge">Best Seller</span>
+              <button type="button" class="btn-drink-zoom" data-zoom-target="./assets/beef_tapa_rice.jpg" aria-label="View Beef Tapa photo full-screen">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  <line x1="11" y1="8" x2="11" y2="14"></line>
+                  <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+              </button>
+            </div>
+            <div class="drink-body">
+              <div class="drink-top-row">
+                <h3 class="drink-title">Beef Tapa &amp; Rice</h3>
+                <span class="drink-price">₱109.00</span>
+              </div>
+              <span class="drink-tag">Comfort Plate &bull; Classic</span>
+              <p class="drink-desc">
+                Tender savory-sweet marinated beef tapa with fried garlic rice, egg, and carrots, corn &amp; green peas.
+              </p>
+            </div>
+          </article>
+
+          <!-- 15. Hungarian Sausage & Rice -->
+          <article class="drink-card" data-category="comfort-food">
+            <div class="drink-media">
+              <img src="./assets/hungarian_sausage_rice.jpg" alt="Grilled Hungarian sausage with garlic rice and egg at Cafe de Place-do" class="drink-img" loading="lazy">
+              <span class="drink-badge">Savory Pick</span>
+              <button type="button" class="btn-drink-zoom" data-zoom-target="./assets/hungarian_sausage_rice.jpg" aria-label="View Hungarian Sausage photo full-screen">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  <line x1="11" y1="8" x2="11" y2="14"></line>
+                  <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+              </button>
+            </div>
+            <div class="drink-body">
+              <div class="drink-top-row">
+                <h3 class="drink-title">Hungarian Sausage &amp; Rice</h3>
+                <span class="drink-price">₱109.00</span>
+              </div>
+              <span class="drink-tag">Comfort Plate &bull; Grilled</span>
+              <p class="drink-desc">
+                Juicy, smokey grilled Hungarian sausage with garlic fried rice, egg, and seasoned buttered corn &amp; peas.
+              </p>
+            </div>
+          </article>
+
+          <!-- 16. Chicks n’ Fries -->
+          <article class="drink-card" data-category="comfort-food">
+            <div class="drink-media">
+              <img src="./assets/chicks_n_fries.jpg" alt="Chicks n Fries baskets with rich cheese sauce at Cafe de Place-do" class="drink-img" loading="lazy">
+              <span class="drink-badge">Best Seller</span>
+              <button type="button" class="btn-drink-zoom" data-zoom-target="./assets/chicks_n_fries.jpg" aria-label="View Chicks n Fries photo full-screen">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  <line x1="11" y1="8" x2="11" y2="14"></line>
+                  <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+              </button>
+            </div>
+            <div class="drink-body">
+              <div class="drink-top-row">
+                <h3 class="drink-title">Chicks n’ Fries</h3>
+                <span class="drink-price">₱95.00</span>
+              </div>
+              <span class="drink-tag">Hot Snack &bull; Cheese Overload</span>
+              <p class="drink-desc">
+                Crispy chicken poppers over crinkle-cut fries drizzled in rich warm cheese sauce. Also available in Duo sharing size (₱145).
+              </p>
+            </div>
+          </article>
+
+          <!-- 17. Snacks Platter -->
+          <article class="drink-card" data-category="comfort-food">
+            <div class="drink-media">
+              <img src="./assets/snacks_platter.jpg" alt="Snacks Platter with hotdog, fries, cheese sticks and dips at Cafe de Place-do" class="drink-img" loading="lazy">
+              <span class="drink-badge">Sharing Trio</span>
+              <button type="button" class="btn-drink-zoom" data-zoom-target="./assets/snacks_platter.jpg" aria-label="View Snacks Platter photo full-screen">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  <line x1="11" y1="8" x2="11" y2="14"></line>
+                  <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+              </button>
+            </div>
+            <div class="drink-body">
+              <div class="drink-top-row">
+                <h3 class="drink-title">Snacks Platter</h3>
+                <span class="drink-price">₱70.00</span>
+              </div>
+              <span class="drink-tag">Snacks &bull; Barkada Plate</span>
+              <p class="drink-desc">
+                Hotdog cuts, golden French fries, and crispy cheese sticks served with savory mustard and ketchup dip cups.
+              </p>
+            </div>
+          </article>
+
+          <!-- 18. Takoyaki Special -->
+          <article class="drink-card" data-category="comfort-food">
+            <div class="drink-media">
+              <img src="./assets/takoyaki_plate.jpg" alt="Takoyaki Special plate with cheese drizzle and bonito flakes at Cafe de Place-do" class="drink-img" loading="lazy">
+              <span class="drink-badge">Patio Special</span>
+              <button type="button" class="btn-drink-zoom" data-zoom-target="./assets/takoyaki_plate.jpg" aria-label="View Takoyaki photo full-screen">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  <line x1="11" y1="8" x2="11" y2="14"></line>
+                  <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+              </button>
+            </div>
+            <div class="drink-body">
+              <div class="drink-top-row">
+                <h3 class="drink-title">Takoyaki Special</h3>
+                <span class="drink-price">Stall Special</span>
+              </div>
+              <span class="drink-tag">Hot Snack &bull; Japanese Style</span>
+              <p class="drink-desc">
+                Savory takoyaki balls freshly prepared and topped with sweet Japanese glaze, creamy cheese mayo, and bonito garnish.
+              </p>
+            </div>
+          </article>
+
+          <!-- 19. Pancit Canton in a Bowl -->
+          <article class="drink-card" data-category="comfort-food">
+            <div class="drink-media">
+              <img src="./assets/pancit_canton_bowls.jpg" alt="Pancit Canton in a bowl with Spam, Siomai, and boiled eggs at Cafe de Place-do" class="drink-img" loading="lazy">
+              <span class="drink-badge">Patio Favorite</span>
+              <button type="button" class="btn-drink-zoom" data-zoom-target="./assets/pancit_canton_bowls.jpg" aria-label="View Pancit Canton photo full-screen">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <circle cx="11" cy="11" r="8"></circle>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  <line x1="11" y1="8" x2="11" y2="14"></line>
+                  <line x1="8" y1="11" x2="14" y2="11"></line>
+                </svg>
+              </button>
+            </div>
+            <div class="drink-body">
+              <div class="drink-top-row">
+                <h3 class="drink-title">Pancit Canton in a Bowl</h3>
+                <span class="drink-price">₱75 – ₱95</span>
+              </div>
+              <span class="drink-tag">Comfort Food &bull; Street Classic</span>
+              <p class="drink-desc">
+                Steaming hot noodles loaded with boiled eggs, plus your choice of Spammy Canton, Siomai Canton, or Canton Overload.
+              </p>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Showcase Pagination Controls (8 items per view) -->
+        <div class="showcase-pagination" id="showcase-pagination">
+          <button type="button" class="btn-page-nav" id="page-prev-btn" aria-label="Previous items page" disabled>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            <span>Previous</span>
+          </button>
+
+          <div class="page-indicators" id="page-indicators">
+            <!-- Rendered dynamically via JS -->
+          </div>
+
+          <button type="button" class="btn-page-nav" id="page-next-btn" aria-label="Next items page">
+            <span>Next</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
         </div>
       </div>
     </section>
 
-    <!-- 3. Core Content Section: Menu & Products Showcase -->
-    <section id="menu" class="menu-section" aria-labelledby="menu-heading">
+    <!-- 3. Official Menu Boards Section (Compact Cards with Full Lightbox) -->
+    <section id="menu" class="menu-sheets-section" aria-labelledby="menu-heading">
       <div class="container">
-        <header class="section-header">
-          <span class="section-tag">Handcrafted Selections</span>
-          <h2 id="menu-heading" class="section-title">Our Featured Signatures</h2>
-          <p class="section-subtitle">Prepared fresh upon order with premium dairy, cacao, espresso, and matcha.</p>
-        </header>
-
-        <!-- Signature Visual Showcase Cards -->
-        <div class="featured-showcase-grid">
-          <!-- Featured Drink 1: Snow Dream Choco -->
-          <article class="product-card featured-highlight">
-            <div class="product-media">
-              <img src="./assets/drinl.jpg" alt="Snow Dream Choco drink topped with whipped cream clouds and rich chocolate syrup drizzle in a Café de Place-do cup" class="product-image" loading="lazy" width="400" height="500">
-              <span class="product-badge">House Specialty</span>
-            </div>
-            <div class="product-body">
-              <div class="product-header">
-                <h3 class="product-title">Snow Dream Choco</h3>
-                <span class="product-price">₱120</span>
-              </div>
-              <p class="product-description">
-                A decadent chilled chocolate beverage layered with creamy milk, topped with cloud-like whipped cream and finished with signature artisanal chocolate syrup swirls.
-              </p>
-              <div class="product-meta">
-                <span class="meta-tag">Iced Signature</span>
-                <span class="meta-tag">Rich Chocolate</span>
-                <span class="meta-tag">Whipped Top</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Featured Drink 2: Choco Latte -->
-          <article class="product-card featured-highlight">
-            <div class="product-media">
-              <img src="./assets/drinkagain.jpg" alt="Choco Latte chilled beverage served over ice on a rustic wooden table with decorative chocolate syrup lines" class="product-image" loading="lazy" width="400" height="500">
-              <span class="product-badge">Customer Favorite</span>
-            </div>
-            <div class="product-body">
-              <div class="product-header">
-                <h3 class="product-title">Choco Latte</h3>
-                <span class="product-price">₱110</span>
-              </div>
-              <p class="product-description">
-                Smooth, rich chocolate infused into creamy velvety milk and poured over crystal ice cubes. Perfect balance of natural sweetness and deep cacao finish.
-              </p>
-              <div class="product-meta">
-                <span class="meta-tag">Silky Smooth</span>
-                <span class="meta-tag">Classic Latte</span>
-                <span class="meta-tag">All-Day Treat</span>
-              </div>
-            </div>
-          </article>
-
-          <!-- Featured Drink 3: Matcha Fam Series -->
-          <article class="product-card featured-highlight">
-            <div class="product-media">
-              <img src="./assets/matcha.jpg" alt="Matcha Fam trio: Matcha Oreo Cream, Matcha Coffee Latte, and Seasalt Matcha Latte served in tall iced cups" class="product-image" loading="lazy" width="400" height="500">
-              <span class="product-badge">Matcha Fam!</span>
-            </div>
-            <div class="product-body">
-              <div class="product-header">
-                <h3 class="product-title">Matcha Fam Trio</h3>
-                <span class="product-price">₱115 - ₱135</span>
-              </div>
-              <p class="product-description">
-                Experience our trio of premium matcha sensations: Matcha Oreo Cream with crunchy cookie crumbles, the layered Matcha Coffee Latte, and savory-sweet Seasalt Matcha Latte.
-              </p>
-              <div class="product-meta">
-                <span class="meta-tag">Matcha Oreo</span>
-                <span class="meta-tag">Coffee Latte</span>
-                <span class="meta-tag">Seasalt Foam</span>
-              </div>
-            </div>
-          </article>
+        <div class="section-title-wrap">
+          <span class="eyebrow">Stall Menu Boards</span>
+          <h2 id="menu-heading" class="section-heading">Official Printed Menu</h2>
+          <p class="section-desc">Click either board below to view in full resolution, or use the quick price check.</p>
         </div>
 
-        <!-- Full Category Pricing Menu Table/Grid -->
-        <div class="full-menu-wrapper">
-          <h3 class="full-menu-heading">Complete Stall Menu & Pricing</h3>
-          
-          <div class="menu-categories-grid">
-            <!-- Category 1: Matcha Series -->
-            <div class="menu-category-card">
-              <h4 class="category-title">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                  <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-                </svg>
-                Matcha Series
-              </h4>
-              <ul class="menu-item-list" role="list">
-                <li class="menu-item">
-                  <div class="item-info">
-                    <span class="item-name">Matcha Oreo Cream</span>
-                    <span class="item-desc">Ceremonial matcha, cream top, crushed oreos</span>
-                  </div>
-                  <span class="item-price">₱130</span>
-                </li>
-                <li class="menu-item">
-                  <div class="item-info">
-                    <span class="item-name">Matcha Coffee Latte</span>
-                    <span class="item-desc">Layered espresso, steamed milk, vibrant matcha</span>
-                  </div>
-                  <span class="item-price">₱135</span>
-                </li>
-                <li class="menu-item">
-                  <div class="item-info">
-                    <span class="item-name">Seasalt Matcha Latte</span>
-                    <span class="item-desc">Sweet green tea balanced with velvety sea salt cream</span>
-                  </div>
-                  <span class="item-price">₱125</span>
-                </li>
-                <li class="menu-item">
-                  <div class="item-info">
-                    <span class="item-name">Classic Pure Matcha Latte</span>
-                    <span class="item-desc">Whisked Japanese green tea with creamy dairy</span>
-                  </div>
-                  <span class="item-price">₱115</span>
-                </li>
-              </ul>
-            </div>
-
-            <!-- Category 2: Chocolate Indulgence -->
-            <div class="menu-category-card">
-              <h4 class="category-title">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                  <line x1="3" y1="9" x2="21" y2="9"></line>
-                  <line x1="9" y1="21" x2="9" y2="9"></line>
-                </svg>
-                Chocolate Confections
-              </h4>
-              <ul class="menu-item-list" role="list">
-                <li class="menu-item">
-                  <div class="item-info">
-                    <span class="item-name">Snow Dream Choco</span>
-                    <span class="item-desc">Whipped foam clouds, premium cacao, chocolate sauce</span>
-                  </div>
-                  <span class="item-price">₱120</span>
-                </li>
-                <li class="menu-item">
-                  <div class="item-info">
-                    <span class="item-name">Choco Latte</span>
-                    <span class="item-desc">Rich double Dutch chocolate blend over ice</span>
-                  </div>
-                  <span class="item-price">₱110</span>
-                </li>
-                <li class="menu-item">
-                  <div class="item-info">
-                    <span class="item-name">Mocha Choco Blast</span>
-                    <span class="item-desc">Espresso shot blended into velvety dark chocolate</span>
-                  </div>
-                  <span class="item-price">₱125</span>
-                </li>
-                <li class="menu-item">
-                  <div class="item-info">
-                    <span class="item-name">Dark Cocoa Seasalt</span>
-                    <span class="item-desc">Bittersweet cacao with signature salted cloud top</span>
-                  </div>
-                  <span class="item-price">₱120</span>
-                </li>
-              </ul>
-            </div>
-
-            <!-- Category 3: Espresso & Brews -->
-            <div class="menu-category-card">
-              <h4 class="category-title">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                  <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
-                  <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
-                </svg>
-                Espresso & Milk
-              </h4>
-              <ul class="menu-item-list" role="list">
-                <li class="menu-item">
-                  <div class="item-info">
-                    <span class="item-name">Café Spanish Latte</span>
-                    <span class="item-desc">Sweet condensed milk paired with dark espresso</span>
-                  </div>
-                  <span class="item-price">₱115</span>
-                </li>
-                <li class="menu-item">
-                  <div class="item-info">
-                    <span class="item-name">Caramel Macchiato</span>
-                    <span class="item-desc">Vanilla cream milk, espresso pour, caramel grid</span>
-                  </div>
-                  <span class="item-price">₱120</span>
-                </li>
-                <li class="menu-item">
-                  <div class="item-info">
-                    <span class="item-name">Iced Americano</span>
-                    <span class="item-desc">Pure double espresso over crisp filtered water & ice</span>
-                  </div>
-                  <span class="item-price">₱90</span>
-                </li>
-                <li class="menu-item">
-                  <div class="item-info">
-                    <span class="item-name">Vanilla Café Latte</span>
-                    <span class="item-desc">Madagascar vanilla syrup with microfoam milk</span>
-                  </div>
-                  <span class="item-price">₱110</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4. Interactive Component Container: Live Drink Customizer & Price Calculator -->
-    <section id="interactive-container" class="interactive-section" aria-labelledby="interactive-heading">
-      <div class="container">
-        <header class="section-header">
-          <span class="section-tag">Interactive Barista Experience</span>
-          <h2 id="interactive-heading" class="section-title">Customize Your Perfect Cup</h2>
-          <p class="section-subtitle">Tailor your base drink, sweetness level, dairy choice, and gourmet add-ons in real time.</p>
-        </header>
-
-        <div class="interactive-widget-box" id="drink-customizer-app">
-          <!-- Drink Selector Tabs -->
-          <div class="category-tabs" role="tablist" aria-label="Select Drink Base Category">
-            <button type="button" class="tab-btn active" role="tab" id="tab-matcha" aria-selected="true" aria-controls="customizer-panel" data-drink-base="matcha">
-              Matcha Favorites
-            </button>
-            <button type="button" class="tab-btn" role="tab" id="tab-choco" aria-selected="false" aria-controls="customizer-panel" data-drink-base="choco">
-              Choco Delights
-            </button>
-            <button type="button" class="tab-btn" role="tab" id="tab-coffee" aria-selected="false" aria-controls="customizer-panel" data-drink-base="coffee">
-              Espresso Bar
-            </button>
-          </div>
-
-          <!-- Configuration Controls Form -->
-          <div class="customizer-layout" id="customizer-panel" role="tabpanel" aria-labelledby="tab-matcha">
-            <form class="customizer-form" id="customizer-form" aria-label="Drink Customizer Settings">
-              <!-- Step 1: Base Selection -->
-              <div class="control-group">
-                <label for="custom-drink-select" class="control-label">1. Choose Your Drink Base</label>
-                <select id="custom-drink-select" class="form-select" aria-label="Select drink base item">
-                  <!-- Populated dynamically via JS or pre-rendered default -->
-                  <option value="matcha-oreo" data-base-price="130" selected>Matcha Oreo Cream (₱130)</option>
-                  <option value="matcha-latte" data-base-price="135">Matcha Coffee Latte (₱135)</option>
-                  <option value="seasalt-matcha" data-base-price="125">Seasalt Matcha Latte (₱125)</option>
-                </select>
-              </div>
-
-              <!-- Step 2: Cup Size -->
-              <fieldset class="control-fieldset">
-                <legend class="control-label">2. Select Cup Size</legend>
-                <div class="radio-pill-group" role="radiogroup" aria-label="Cup Size">
-                  <label class="radio-pill">
-                    <input type="radio" name="cup-size" value="regular" data-size-add="0" checked>
-                    <span class="pill-content">
-                      <span class="pill-title">Regular (16 oz)</span>
-                      <span class="pill-desc">Standard Size</span>
-                    </span>
-                  </label>
-                  <label class="radio-pill">
-                    <input type="radio" name="cup-size" value="large" data-size-add="20">
-                    <span class="pill-content">
-                      <span class="pill-title">Large (22 oz)</span>
-                      <span class="pill-desc">+₱20</span>
-                    </span>
-                  </label>
-                </div>
-              </fieldset>
-
-              <!-- Step 3: Sweetness Level -->
-              <div class="control-group">
-                <label for="sweetness-slider" class="control-label">
-                  3. Sweetness Preference: <span id="sweetness-value" class="highlight-val">75% (Standard)</span>
-                </label>
-                <input type="range" id="sweetness-slider" class="form-slider" min="0" max="100" step="25" value="75" aria-label="Sweetness percentage slider">
-                <div class="slider-ticks" aria-hidden="true">
-                  <span>0%</span>
-                  <span>25%</span>
-                  <span>50%</span>
-                  <span>75%</span>
-                  <span>100%</span>
-                </div>
-              </div>
-
-              <!-- Step 4: Premium Add-ons -->
-              <fieldset class="control-fieldset">
-                <legend class="control-label">4. Gourmet Add-ons</legend>
-                <div class="checkbox-pill-grid">
-                  <label class="checkbox-pill">
-                    <input type="checkbox" name="addons" value="seasalt-foam" data-addon-price="25">
-                    <span class="pill-content">
-                      <span class="pill-title">Seasalt Cream Cloud</span>
-                      <span class="pill-desc">+₱25</span>
-                    </span>
-                  </label>
-                  <label class="checkbox-pill">
-                    <input type="checkbox" name="addons" value="espresso-shot" data-addon-price="30">
-                    <span class="pill-content">
-                      <span class="pill-title">Extra Espresso Shot</span>
-                      <span class="pill-desc">+₱30</span>
-                    </span>
-                  </label>
-                  <label class="checkbox-pill">
-                    <input type="checkbox" name="addons" value="oreo-crumble" data-addon-price="15">
-                    <span class="pill-content">
-                      <span class="pill-title">Oreo Cookie Crunch</span>
-                      <span class="pill-desc">+₱15</span>
-                    </span>
-                  </label>
-                  <label class="checkbox-pill">
-                    <input type="checkbox" name="addons" value="choco-drizzle" data-addon-price="15">
-                    <span class="pill-content">
-                      <span class="pill-title">Choco Fudge Drizzle</span>
-                      <span class="pill-desc">+₱15</span>
-                    </span>
-                  </label>
-                </div>
-              </fieldset>
-            </form>
-
-            <!-- Customizer Live Summary & Total Card -->
-            <aside class="customizer-summary" aria-label="Custom Drink Estimate Summary">
-              <div class="summary-card">
-                <div class="summary-badge">Live Cup Calculation</div>
-                <h3 class="summary-drink-name" id="summary-name">Matcha Oreo Cream</h3>
-                <p class="summary-details" id="summary-breakdown">Regular (16 oz) • 75% Sweetness • No Extra Add-ons</p>
-                
-                <hr class="summary-divider">
-
-                <div class="price-display-wrapper">
-                  <span class="price-label">Estimated Price:</span>
-                  <span class="price-amount" id="total-price-display">₱130</span>
-                </div>
-
-                <button type="button" class="btn btn-primary btn-block" id="add-to-order-btn">
+        <!-- Compact Menu Board Cards -->
+        <div class="menu-boards-cards-grid">
+          <!-- Board Page 1 -->
+          <div class="menu-board-card" data-zoom-target="./assets/menu_page1.png" role="button" tabindex="0" aria-label="Open Menu Page 1 full screen">
+            <div class="board-thumb-frame">
+              <img src="./assets/menu_page1.png" alt="Official Menu Page 1: Coffee, Seasalt Series, Non-Coffee, Signature Drinks, Matcha Series" class="board-thumb-img" loading="lazy">
+              <div class="board-thumb-overlay">
+                <span class="btn-expand-badge">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <circle cx="9" cy="21" r="1"></circle>
-                    <circle cx="20" cy="21" r="1"></circle>
-                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
                   </svg>
-                  Note My Custom Order
-                </button>
-                <p class="order-notice" id="order-feedback" aria-live="polite">Ready to craft your custom beverage at the counter!</p>
+                  <span>Click to Expand Full Screen</span>
+                </span>
               </div>
-            </aside>
+            </div>
+            <div class="board-card-info">
+              <div class="board-tag-row">
+                <span class="board-num-tag">Board Page 1</span>
+                <span class="board-meta-tag">Coffee &bull; Seasalt &bull; Matcha</span>
+              </div>
+              <h3 class="board-card-name">Coffee &amp; Specialty Drinks</h3>
+              <p class="board-card-desc">Complete price list for Americano, Lattes, Seasalt series, Non-Coffee, and Matcha blends.</p>
+              <button type="button" class="btn btn-secondary btn-full" data-zoom-target="./assets/menu_page1.png">
+                Open Full-Size Board &rarr;
+              </button>
+            </div>
+          </div>
+
+          <!-- Board Page 2 -->
+          <div class="menu-board-card" data-zoom-target="./assets/menu_page2.png" role="button" tabindex="0" aria-label="Open Menu Page 2 full screen">
+            <div class="board-thumb-frame">
+              <img src="./assets/menu_page2.png" alt="Official Menu Page 2: Biscoff Series, Extras, Fruity Juices & Sodas, Comfort Plates, Snacks, and Pancit Canton in a Bowl" class="board-thumb-img" loading="lazy">
+              <div class="board-thumb-overlay">
+                <span class="btn-expand-badge">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                  <span>Click to Expand Full Screen</span>
+                </span>
+              </div>
+            </div>
+            <div class="board-card-info">
+              <div class="board-tag-row">
+                <span class="board-num-tag">Board Page 2</span>
+                <span class="board-meta-tag">Biscoff &bull; Meals &bull; Canton</span>
+              </div>
+              <h3 class="board-card-name">Biscoff, Refreshers &amp; Comfort Plates</h3>
+              <p class="board-card-desc">Lotus Biscoff drinks, fruit juices, sparkling sodas, hearty rice meals, snacks, and Pancit Canton bowls.</p>
+              <button type="button" class="btn btn-secondary btn-full" data-zoom-target="./assets/menu_page2.png">
+                Open Full-Size Board &rarr;
+              </button>
+            </div>
           </div>
         </div>
 
-        <!-- Interactive FAQ Accordion -->
-        <div class="faq-container">
-          <h3 class="faq-section-title">Frequently Asked Questions</h3>
-          <div class="accordion" id="faq-accordion" role="region" aria-label="Café FAQ Accordion">
-            <details class="accordion-item" open>
-              <summary class="accordion-trigger">
-                <span>What are your operating hours and location?</span>
-                <span class="accordion-chevron" aria-hidden="true">+</span>
-              </summary>
-              <div class="accordion-content">
-                <p>We are open daily from Tuesday to Sunday, 2:00 PM to 10:00 PM. We are situated at our cozy al fresco stall with open-air seating for all our visitors.</p>
-              </div>
-            </details>
+        <!-- Quick Item Finder (Minimal & Non-Intrusive) -->
+        <div class="menu-quick-finder">
+          <div class="finder-header">
+            <h3>Quick Price Check</h3>
+            <p>Looking for a specific drink or dish? Type the name to quickly verify price and availability.</p>
+          </div>
+          <div class="finder-input-wrap">
+            <svg class="finder-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="search" id="quick-item-search" class="finder-input" placeholder="Search Americano, Seasalt, Matcha, Canton, Poppers, Biscoff..." aria-label="Quick menu search">
+            <button type="button" id="clear-quick-search" class="clear-btn" aria-label="Clear search" hidden>&times;</button>
+          </div>
+          <div id="finder-results-box" class="finder-results" hidden></div>
+        </div>
+      </div>
+    </section>
 
-            <details class="accordion-item">
-              <summary class="accordion-trigger">
-                <span>Do you offer non-dairy or oat milk options?</span>
-                <span class="accordion-chevron" aria-hidden="true">+</span>
-              </summary>
-              <div class="accordion-content">
-                <p>Yes! We have oat milk and soy alternatives available for both our coffee and matcha selections upon request at the bar.</p>
-              </div>
-            </details>
+    <!-- 4. Customer Voice & Drink Wishlist Board -->
+    <section id="wishlist" class="wishlist-section" aria-labelledby="wishlist-heading">
+      <div class="container">
+        <div class="section-title-wrap">
+          <span class="eyebrow">Customer Voice & Wishlist</span>
+          <h2 id="wishlist-heading" class="section-heading">Have a Drink or Dish in Mind?</h2>
+          <p class="section-desc">
+            Craving a coffee, refresher, or comfort snack that isn't on our menu yet? Let us know! You can also upvote requests submitted by fellow patrons.
+          </p>
+        </div>
 
-            <details class="accordion-item">
-              <summary class="accordion-trigger">
-                <span>Can we book the patio for small gatherings or group study?</span>
-                <span class="accordion-chevron" aria-hidden="true">+</span>
-              </summary>
-              <div class="accordion-content">
-                <p>Absolutely. You can reserve tables for study groups, barkada hangouts, or intimate celebrations using our contact form below or through direct message.</p>
+        <div class="wishlist-layout">
+          <!-- Left: Submission Form -->
+          <div class="wishlist-form-card">
+            <!-- Mode Switcher -->
+            <div class="form-mode-tabs" role="tablist">
+              <button type="button" class="form-mode-btn active" id="btn-mode-wishlist" role="tab" aria-selected="true" data-mode="wishlist">
+                <span>Request a Drink / Food</span>
+              </button>
+              <button type="button" class="form-mode-btn" id="btn-mode-review" role="tab" aria-selected="false" data-mode="review">
+                <span>Leave a Review</span>
+              </button>
+            </div>
+
+            <form id="community-input-form" class="clean-form" novalidate>
+              <input type="hidden" id="active-mode-input" value="wishlist">
+
+              <div class="form-group">
+                <label for="input-author">Your Name or Nickname <span class="req">*</span></label>
+                <input type="text" id="input-author" class="text-input" placeholder="e.g. Bianca from Rizal" required>
+                <span class="error-msg" id="err-author"></span>
               </div>
-            </details>
+
+              <!-- Wishlist Specific Fields -->
+              <div id="fields-wishlist" class="dynamic-fields">
+                <div class="form-group">
+                  <label for="input-wish-title">Drink / Food You Want Added <span class="req">*</span></label>
+                  <input type="text" id="input-wish-title" class="text-input" placeholder="e.g. Dirty Matcha, Pistachio Latte, Cheesy Croffle">
+                  <span class="error-msg" id="err-wish-title"></span>
+
+                  <!-- Quick Chips -->
+                  <div class="suggestion-chips">
+                    <span class="chips-title">Popular suggestions:</span>
+                    <button type="button" class="chip-btn" data-value="Dirty Matcha Latte" data-cat="Specialty Coffee">+ Dirty Matcha</button>
+                    <button type="button" class="chip-btn" data-value="Pistachio Cream Latte" data-cat="Specialty Coffee">+ Pistachio Latte</button>
+                    <button type="button" class="chip-btn" data-value="Cheesy Croffle" data-cat="Pastry / Snack">+ Cheesy Croffle</button>
+                    <button type="button" class="chip-btn" data-value="Creamy Carbonara" data-cat="Comfort Food">+ Carbonara</button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="select-wish-category">Category</label>
+                  <select id="select-wish-category" class="select-input">
+                    <option value="Specialty Coffee">Specialty Coffee</option>
+                    <option value="Non-Coffee / Refresher">Non-Coffee / Refresher</option>
+                    <option value="Pastry / Snack">Pastry / Sweet Snack</option>
+                    <option value="Comfort Food">Comfort Food / Meal</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Review Specific Fields -->
+              <div id="fields-review" class="dynamic-fields" hidden>
+                <div class="form-group">
+                  <label for="input-fav-drink">Your Favorite Drink or Dish</label>
+                  <input type="text" id="input-fav-drink" class="text-input" placeholder="e.g. Seasalt Spanish Latte or Canton Overload">
+                </div>
+
+                <div class="form-group">
+                  <label>Your Rating</label>
+                  <div class="star-rating-box" role="radiogroup" aria-label="Rating out of 5">
+                    <button type="button" class="star-item active" data-val="1" aria-label="1 star">&#9733;</button>
+                    <button type="button" class="star-item active" data-val="2" aria-label="2 stars">&#9733;</button>
+                    <button type="button" class="star-item active" data-val="3" aria-label="3 stars">&#9733;</button>
+                    <button type="button" class="star-item active" data-val="4" aria-label="4 stars">&#9733;</button>
+                    <button type="button" class="star-item active" data-val="5" aria-label="5 stars">&#9733;</button>
+                  </div>
+                  <input type="hidden" id="input-star-val" value="5">
+                </div>
+              </div>
+
+              <!-- Note / Reason -->
+              <div class="form-group">
+                <label for="input-message" id="label-message">
+                  Why should we add this? Or tell us your experience <span class="req">*</span>
+                </label>
+                <textarea id="input-message" class="textarea-input" rows="3" placeholder="Tell the Place-do team why you'd love to see this on our menu..." required></textarea>
+                <span class="error-msg" id="err-message"></span>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-full" id="btn-submit-community">
+                Submit to Community Board
+              </button>
+              <div id="submit-notice" class="form-notice" role="status" aria-live="polite"></div>
+            </form>
+          </div>
+
+          <!-- Right: Community Board List -->
+          <div class="wishlist-board-card">
+            <div class="board-top">
+              <div>
+                <h3 class="board-title">Community Requests & Reviews</h3>
+                <span class="board-sub">Recent suggestions submitted by local patrons</span>
+              </div>
+              <div class="board-filters">
+                <button type="button" class="board-filter-btn active" data-filter="all">All</button>
+                <button type="button" class="board-filter-btn" data-filter="wishlist">Requests</button>
+                <button type="button" class="board-filter-btn" data-filter="review">Reviews</button>
+              </div>
+            </div>
+
+            <!-- List Container -->
+            <div id="community-items-list" class="community-items-list">
+              <!-- Dynamically rendered via JS -->
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 5. Community & Experience Section (Featuring assets/tao.jpg) -->
-    <section id="community" class="community-section" aria-labelledby="community-heading">
+    <!-- 5. Atmosphere & Location Section -->
+    <section id="visit" class="visit-section" aria-labelledby="visit-heading">
       <div class="container">
-        <div class="community-layout">
-          <div class="community-visual">
-            <figure class="community-figure">
-              <img src="./assets/tao.jpg" alt="A lively group of friends and patrons gathering and chatting happily at Café de Place-do outdoor timber tables under warm string lights at dusk" class="community-image" loading="lazy" width="400" height="530">
-              <figcaption class="community-caption">
-                <strong>Evenings at Place-do</strong>
-                <span>Good company, great drinks, unforgettable memories</span>
+        <div class="visit-grid">
+          <div class="visit-copy">
+            <span class="eyebrow">Find Our Stall</span>
+            <h2 id="visit-heading" class="section-heading">Come Hang Out at the Patio</h2>
+            <p class="visit-desc">
+              Whether you're stopping by after school, catching up with friends, or enjoying a night coffee under the open sky, you are always welcome at Place-do.
+            </p>
+
+            <div class="visit-details-list">
+              <div class="detail-row">
+                <div class="detail-icon-box">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                </div>
+                <div>
+                  <strong>Operating Hours</strong>
+                  <p>Open Daily &bull; 1:00 PM &ndash; 10:00 PM</p>
+                </div>
+              </div>
+
+              <div class="detail-row">
+                <div class="detail-icon-box">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                  </svg>
+                </div>
+                <div>
+                  <strong>Location</strong>
+                  <p>Betis, Sta. Monica, Rizal, Nueva Ecija (along the highway, in front of the irrigation canal)</p>
+                  <a href="https://maps.google.com/?q=Sta.+Monica,+Rizal,+Nueva+Ecija" target="_blank" rel="noopener noreferrer" class="link-maps">
+                    Open in Google Maps &rarr;
+                  </a>
+                </div>
+              </div>
+
+              <div class="detail-row">
+                <div class="detail-icon-box">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                  </svg>
+                </div>
+                <div>
+                  <strong>Facebook & Instagram</strong>
+                  <p>
+                    <a href="https://www.facebook.com/cafedeplacedo" target="_blank" rel="noopener noreferrer" class="social-link">facebook.com/cafedeplacedo</a>
+                    &bull;
+                    <a href="https://www.instagram.com/cafe.de.placedo/" target="_blank" rel="noopener noreferrer" class="social-link">@cafe.de.placedo</a>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="visit-cta-wrap">
+              <a href="https://m.me/cafedeplacedo" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                Chat on Messenger
+              </a>
+              <a href="https://www.facebook.com/cafedeplacedo" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                Follow on Facebook
+              </a>
+            </div>
+          </div>
+
+          <div class="visit-media">
+            <figure class="patio-figure">
+              <img src="./assets/stall_canopy_tent.jpg" alt="Café de Place-do handcrafted timber brew stall under the illuminated canopy tent in Rizal, Nueva Ecija" class="patio-img" loading="lazy">
+              <figcaption class="patio-caption">
+                <strong>Our Timber Stall Under the Canopy Lights</strong>
+                <span>Betis, Sta. Monica, Rizal, Nueva Ecija (In front of irrigation)</span>
               </figcaption>
             </figure>
           </div>
-
-          <div class="community-content">
-            <span class="section-tag">Community & Atmosphere</span>
-            <h2 id="community-heading" class="section-title">A Welcoming Al Fresco Space for Everyone</h2>
-            <p class="community-lead">
-              At Café de Place-do, coffee is more than a beverage—it's a shared experience. Our patio brings together friends catching up, students collaborating, and neighbors unwinding after a long day.
-            </p>
-            <ul class="community-perks" role="list">
-              <li class="perk-item">
-                <div class="perk-icon" aria-hidden="true">✓</div>
-                <div>
-                  <strong>Cozy Ambient Lighting</strong>
-                  <p>Warm hanging lanterns create the perfect evening backdrop for deep conversations and relaxation.</p>
-                </div>
-              </li>
-              <li class="perk-item">
-                <div class="perk-icon" aria-hidden="true">✓</div>
-                <div>
-                  <strong>Friendly Barista Service</strong>
-                  <p>Our dedicated team takes pride in greeting every guest with genuine warmth and customized drink recommendations.</p>
-                </div>
-              </li>
-              <li class="perk-item">
-                <div class="perk-icon" aria-hidden="true">✓</div>
-                <div>
-                  <strong>Breezy Open Air Setting</strong>
-                  <p>Breathe in fresh open air surrounded by greenery and wooden craft aesthetics.</p>
-                </div>
-              </li>
-            </ul>
-          </div>
         </div>
       </div>
     </section>
 
-    <!-- 6. Contact & Inquiry Section -->
-    <section id="contact" class="contact-section" aria-labelledby="contact-heading">
-      <div class="container">
-        <header class="section-header">
-          <span class="section-tag">Get in Touch</span>
-          <h2 id="contact-heading" class="section-title">Visit Our Stall or Send a Message</h2>
-          <p class="section-subtitle">Have a question, feedback, or special catering request? We'd love to hear from you.</p>
-        </header>
-
-        <div class="contact-grid">
-          <!-- Contact Information Cards -->
-          <div class="contact-info-panel">
-            <div class="info-card">
-              <div class="info-icon" aria-hidden="true">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                  <circle cx="12" cy="10" r="3"></circle>
-                </svg>
-              </div>
-              <div class="info-text">
-                <h3>Our Location</h3>
-                <p>Al Fresco Patio Brew Bar<br>Near Town Plaza Promenade, Philippines</p>
-              </div>
-            </div>
-
-            <div class="info-card">
-              <div class="info-icon" aria-hidden="true">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <polyline points="12 6 12 12 16 14"></polyline>
-                </svg>
-              </div>
-              <div class="info-text">
-                <h3>Operating Hours</h3>
-                <p>Tuesday - Sunday: 2:00 PM - 10:00 PM<br>Monday: Closed for Barista Rest & Restock</p>
-              </div>
-            </div>
-
-            <div class="info-card">
-              <div class="info-icon" aria-hidden="true">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                </svg>
-              </div>
-              <div class="info-text">
-                <h3>Direct Inquiries</h3>
-                <p>Mobile: +63 (912) 345-6789<br>Email: hello@cafedeplacedo.com</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Working Static Contact Form UI -->
-          <div class="contact-form-panel">
-            <form class="contact-form" id="contact-form" method="POST" action="#" novalidate>
-              <div class="form-row">
-                <div class="form-field">
-                  <label for="contact-name">Your Full Name <span class="required" aria-hidden="true">*</span></label>
-                  <input type="text" id="contact-name" name="name" class="form-input" placeholder="e.g. Maria Santos" required autocomplete="name">
-                  <span class="field-error" id="name-error" aria-live="polite"></span>
-                </div>
-                <div class="form-field">
-                  <label for="contact-email">Email Address <span class="required" aria-hidden="true">*</span></label>
-                  <input type="email" id="contact-email" name="email" class="form-input" placeholder="maria@example.com" required autocomplete="email">
-                  <span class="field-error" id="email-error" aria-live="polite"></span>
-                </div>
-              </div>
-
-              <div class="form-field">
-                <label for="contact-subject">Inquiry Type</label>
-                <select id="contact-subject" name="subject" class="form-select">
-                  <option value="general" selected>General Question</option>
-                  <option value="reservation">Table / Group Gathering Reservation</option>
-                  <option value="catering">Event Catering & Bulk Orders</option>
-                  <option value="feedback">Customer Feedback & Compliments</option>
-                </select>
-              </div>
-
-              <div class="form-field">
-                <label for="contact-message">Your Message <span class="required" aria-hidden="true">*</span></label>
-                <textarea id="contact-message" name="message" rows="5" class="form-textarea" placeholder="How can we assist you today? Let us know what's on your mind..." required></textarea>
-                <span class="field-error" id="message-error" aria-live="polite"></span>
-              </div>
-
-              <button type="submit" class="btn btn-primary btn-submit" id="submit-btn">
-                <span>Send Message</span>
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                  <line x1="22" y1="2" x2="11" y2="13"></line>
-                  <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-                </svg>
-              </button>
-
-              <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </section>
   </main>
 
-  <!-- Footer Landmark -->
+  <!-- Clean, Minimal Footer -->
   <footer class="site-footer" role="contentinfo">
-    <div class="footer-container">
-      <div class="footer-grid">
-        <!-- Brand Summary Column -->
-        <div class="footer-brand-col">
-          <a href="#hero" class="brand footer-brand" aria-label="Café de Place-do Home">
-            <img src="./assets/logo.jpg" alt="Café de Place-do logo - Est. 2025" class="brand-logo" width="40" height="40">
-            <span class="brand-name">Café de <span class="brand-accent">place-do</span></span>
-          </a>
-          <p class="footer-description">
-            Your neighborhood al fresco destination for handcrafted iced espresso, matcha blends, and rich chocolate comfort in every sip.
-          </p>
-          <p class="footer-est">Established 2025 • Brewed with Love</p>
+    <div class="container footer-container">
+      <div class="footer-brand-wrap">
+        <div class="footer-brand-title">
+          <span class="brand-cafe-de">CAFÉ DE</span>
+          <div class="brand-title"><span class="brand-place">place</span><span class="brand-do">-do</span></div>
+          <div class="brand-sibs-badge"><span class="sibs-line"></span><span class="sibs-pill">BY SIBS</span><span class="sibs-line"></span></div>
         </div>
+        <p class="footer-tagline">Your Place to Do Life & Coffee &bull; Open Daily 1 PM &ndash; 10 PM</p>
+        <p class="footer-subtext">Betis, Sta. Monica, Rizal, Nueva Ecija, Philippines</p>
+      </div>
 
-        <!-- Quick Links Navigation -->
-        <nav class="footer-nav-col" aria-label="Footer Quick Links">
-          <h4 class="footer-heading">Quick Links</h4>
-          <ul class="footer-link-list" role="list">
-            <li><a href="#hero" class="footer-link">Home</a></li>
-            <li><a href="#about" class="footer-link">Our Story</a></li>
-            <li><a href="#menu" class="footer-link">Signature Menu</a></li>
-            <li><a href="#interactive-container" class="footer-link">Drink Customizer</a></li>
-            <li><a href="#community" class="footer-link">Patio Experience</a></li>
-            <li><a href="#contact" class="footer-link">Find Our Stall</a></li>
-          </ul>
-        </nav>
-
-        <!-- Signature Drinks List -->
-        <div class="footer-drinks-col">
-          <h4 class="footer-heading">Signatures</h4>
-          <ul class="footer-link-list" role="list">
-            <li><a href="#menu" class="footer-link">Snow Dream Choco</a></li>
-            <li><a href="#menu" class="footer-link">Choco Latte</a></li>
-            <li><a href="#menu" class="footer-link">Matcha Oreo Cream</a></li>
-            <li><a href="#menu" class="footer-link">Matcha Coffee Latte</a></li>
-            <li><a href="#menu" class="footer-link">Seasalt Matcha Latte</a></li>
-          </ul>
-        </div>
-
-        <!-- Connect & Social Links -->
-        <div class="footer-social-col">
-          <h4 class="footer-heading">Connect With Us</h4>
-          <p class="footer-social-note">Tag us in your moments with #CafeDePlaceDo!</p>
-          <div class="social-links-group" aria-label="Social Media Links">
-            <!-- Facebook -->
-            <a href="https://facebook.com" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Visit Café de Place-do on Facebook">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-              </svg>
-            </a>
-            <!-- Instagram -->
-            <a href="https://instagram.com" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Visit Café de Place-do on Instagram">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-            </a>
-            <!-- TikTok -->
-            <a href="https://tiktok.com" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="Visit Café de Place-do on TikTok">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path>
-              </svg>
-            </a>
-          </div>
-          <div class="back-to-top-wrapper">
-            <a href="#hero" class="back-to-top-link" aria-label="Back to top of page">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <polyline points="18 15 12 9 6 15"></polyline>
-              </svg>
-              <span>Back to Top</span>
-            </a>
-          </div>
-        </div>
+      <div class="footer-links-wrap">
+        <a href="#hero">Home</a>
+        <a href="#showcase">Available Items</a>
+        <a href="#menu">Menu Boards</a>
+        <a href="#wishlist">Drink Wishlist</a>
+        <a href="#visit">Location</a>
+        <a href="https://www.facebook.com/cafedeplacedo" target="_blank" rel="noopener noreferrer">Facebook</a>
       </div>
 
       <div class="footer-bottom">
-        <p class="copyright">&copy; 2025–2026 Café de Place-do. All rights reserved.</p>
-        <p class="footer-subtext">Handcrafted with care for our local community.</p>
+        <p>&copy; 2025&ndash;2026 Café de Place-do. All rights reserved.</p>
+        <p class="pronounce-note">(pronounced: <em>cafe de pley-si-do</em>)</p>
       </div>
     </div>
   </footer>
 
-  <!-- Relative Link to Vanilla JavaScript -->
+  <!-- Lightbox Modal for Menu Sheets (Full-Screen Viewing) -->
+  <div id="lightbox-modal" class="lightbox-modal" role="dialog" aria-modal="true" aria-label="Full-size menu viewer" hidden>
+    <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+    <div class="lightbox-content">
+      <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close full-size menu viewer">&times;</button>
+      <img src="" alt="Full-size menu sheet" class="lightbox-img" id="lightbox-img">
+    </div>
+  </div>
+
+  <!-- Vanilla JavaScript -->
   <script src="./script.js"></script>
 </body>
 </html>
